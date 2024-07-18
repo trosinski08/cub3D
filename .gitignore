@@ -1,0 +1,39 @@
+# Dependency directories
+node_modules/
+vendor/
+
+# Compiled source code
+*.exe
+*.dll
+*.class
+
+# Build output directories
+/bin/
+/build/
+/dist/
+
+# System files and editor temporary files
+.DS_Store
+Thumbs.db
+*.swp
+
+# Environment files and sensitive information
+.env
+secrets.yml
+
+# Ignore all hidden files
+.*
+
+# Ignore all .o files
+*.o
+
+# But keep the .gitignore file (remove "!" for final push to school)
+!/.gitignore
+
+# MLX ignored
+MLX42/
+
+# ignore compiled files
+miniRT
+gnl42
+libft
