@@ -6,7 +6,7 @@
 /*   By: trosinsk <trosinsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 22:00:20 by trosinsk          #+#    #+#             */
-/*   Updated: 2024/07/18 22:01:32 by trosinsk         ###   ########.fr       */
+/*   Updated: 2024/09/21 00:10:03 by trosinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,86 @@
 # include <errno.h>
 # include <limits.h>
 # include <stdbool.h>
-// # include "mlx.h"
-// # include "libft.h"
-// # include "get_next_line.h"
+# include "./MLX42/include/MLX42/MLX42.h"
+# include "libft/include/libft.h"
+# include "./gnl42/include/get_next_line.h"
+// # include "MLX42.h"
 
 
+# define MLX_KEY_W 87
+# define MLX_KEY_A 65
+# define MLX_KEY_S 83
+# define MLX_KEY_D 68
+# define MLX_KEY_ESC 256
+# define WALL 1
+# define EMPTY 0
+# define PLAYER 2
+# define PI 3.14159265359
+# define FOV 60
+# define SPEED 0.1
+# define ROTATE 0.1
+# define MINIMAP_SCALE 0.2
+# define MINIMAP_SIZE 10
+# define TILE_SZ 8
+# define TILE_SCALE 0.2
+# define WIDTH 1024
+# define HEIGHT 512
+
+typedef struct s_map
+{
+	int		**map;
+	int		width;
+	int		height;
+}				t_map;
+
+typedef struct s_player
+{
+	double	pos_x;
+	double	pos_y;
+	double	fov;
+	double	player_angle;
+	double	p_delta_x;
+	double	p_delta_y;
+	double	dir;
+}				t_player;
+
+typedef struct s_ray
+{
+	double	x;
+	double	y;
+	double	dir;
+	double	dist;
+}				t_ray;
+
+
+typedef struct s_game
+{
+	t_map		map;
+	t_player	player;
+	t_ray		*ray;
+	mlx_t		*mlx;
+	void		*win;
+	mlx_image_t	*img;
+	char		*addr;
+	int			bpp;
+	int			line_len;
+	int			endian;
+	int			color;
+	int			draw_start;
+	int			enter_flag;
+	int			mini_flag;
+}				t_game;
+
+
+void		my_keyhook(mlx_key_data_t keydata, void *param);
+void		new_image(void *param);
+int			free_garb(void);
+int			checker(t_game *game, int argc, char **argv);
+int			map_parser(t_game *game, char *file);
+u_int32_t	get_rgba(int r, int g, int b, int a);
+void		draw_player(t_game *game, int xo);
+t_game		*init_game(void);
+mlx_t		*init_mlx(t_game *game);
+void		init_map(t_game *game, int height, int width, char **map_str);
 
 #endif

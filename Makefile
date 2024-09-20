@@ -1,41 +1,49 @@
-.silent:
-
+CC		:= cc
 NAME	:= cub3D
-CC		:= cc 
 CFLAGS	:= -Wextra -Wall -Werror -Wunreachable-code -Ofast -g
 LIBMLX	:= ./MLX42
-SRCS 	:= main.c \
+SRCS 	:= main.c checks.c garbage_collector.c errors.c utils.c parser.c \
+			key_hook.c mlx.c init.c player.c
 LIBFT	:= ./libft
-GNL 	:= ./gnl42
+GNL		:= ./gnl42
+# BONUS	:= bonus.c
 
 HEADERS	:= -I ./include -I $(LIBMLX)/include
-LIBS	:= $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm 
+LIBS	:= $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm #-fsanitize=address
 INCLUDE := -L $(LIBFT) -lft -L $(GNL) -lgnl
 OBJS	:= ${SRCS:.c=.o}
 # BOBJS	:= ${BONUS:.c=.o}
 
-all: $(NAME)
+all: libmlx $(NAME)
+
+libmlx:
+	git clone https://github.com/codam-coding-college/MLX42.git 
+	@cmake $(LIBMLX) -B $(LIBMLX)/build && make -sC $(LIBMLX)/build -j4
 
 %.o: %.c
 	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS)
 
 $(NAME): $(OBJS)
-	@make -sC $(LIBFT)
-	@make -sC $(GNL)
-	@cmake $(LIBMLX) -B $(LIBMLX)/build && make -sC $(LIBMLX)/build -j4
+	make -sC $(LIBFT)
+	make -sC $(GNL)
 	@$(CC) $(OBJS) $(LIBS) $(HEADERS) $(INCLUDE) -o $(NAME)
 
-bonus: $(NAME)
+# bonus:
+# $(NAME): $(OBJS) $(BOBJS)
+# 	make -C $(LIBFT)
+# 	@$(CC) $(OBJS) $(BOBJS) $(LIBS) $(HEADERS) $(INCLUDE) -o $(NAME)
 
 clean:
 	@rm -rf $(OBJS) $(BOBJS)
 	@cd $(LIBFT) && $(MAKE) clean
 	@cd $(GNL) && $(MAKE) clean
+	@rm -rf MLX42
 
 fclean: clean
 	@rm -rf $(NAME)
-	@cd $(GNL) && $(MAKE) fclean
 	@cd $(LIBFT) && $(MAKE) fclean
+	@cd $(GNL) && $(MAKE) fclean
+	
 
 re: clean all
 
