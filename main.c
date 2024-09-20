@@ -6,7 +6,7 @@
 /*   By: trosinsk <trosinsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 22:19:20 by trosinsk          #+#    #+#             */
-/*   Updated: 2024/09/20 00:10:16 by trosinsk         ###   ########.fr       */
+/*   Updated: 2024/09/21 01:08:25 by trosinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,3 +54,12 @@ int	main(int argc, char **argv)
 	mlx_terminate(mlx);
 	return (free_garb(), 0);
 }
+
+
+/*
+-mala mapa w lewym gornym rogu, ma pokazywac okreslony wymiar
+-W S A D zalezne od kierunku patrzenia
+-staly rozmiar elementow jednak potrzebny, lekko popraw logike
+popracuj nad parsingiem i checkami
+-zaimplementuj garb_collector
+*/

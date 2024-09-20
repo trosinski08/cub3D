@@ -6,7 +6,7 @@
 /*   By: trosinsk <trosinsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 01:14:26 by trosinsk          #+#    #+#             */
-/*   Updated: 2024/09/21 00:12:12 by trosinsk         ###   ########.fr       */
+/*   Updated: 2024/09/21 00:55:55 by trosinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,7 @@ void	draw_ray(t_game *game, int xo)
 
 	i = 0;
 	ray_angle = game->player.dir - game->player.fov / 2;
-	printf("Player position: x = %f, y = %f\n", game->player.pos_x, game->player.pos_y);
-	while (i < WIDTH)
+	while (ray_angle < game->player.dir + game->player.fov / 2)
 	{
 		ray_x = game->player.pos_x + cos(ray_angle) * 100;
 		ray_y = game->player.pos_y + sin(ray_angle) * 100;
@@ -60,7 +59,10 @@ void	draw_ray(t_game *game, int xo)
 			ray_dist += 5;
 		}
 		lin_interp(game, ray_x, ray_y);
-		ray_angle += game->player.fov / WIDTH;
+		// ray_angle += game->player.fov / WIDTH / 10;
+		// printf("Player fov: %f, WIDTH: %d\n", game->player.fov, WIDTH);
+		ray_angle += 0.01;
+		printf("ray_angle: %f\n", ray_angle);
 		i++;
 	}
 }

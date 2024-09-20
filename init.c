@@ -6,7 +6,7 @@
 /*   By: trosinsk <trosinsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 01:15:23 by trosinsk          #+#    #+#             */
-/*   Updated: 2024/09/20 23:39:10 by trosinsk         ###   ########.fr       */
+/*   Updated: 2024/09/21 00:25:25 by trosinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ t_player	player_init(t_game *game)
 	t_player	player;
 
 	(void)game;
-	player.fov = FOV;
+	player.fov = FOV * PI / 180;
 	player.player_angle = 0;
 	player.pos_x = WIDTH / 2;
 	player.pos_y = HEIGHT / 2;
