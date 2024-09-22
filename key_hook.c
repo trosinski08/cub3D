@@ -6,7 +6,7 @@
 /*   By: trosinsk <trosinsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 00:51:36 by trosinsk          #+#    #+#             */
-/*   Updated: 2024/09/20 23:40:06 by trosinsk         ###   ########.fr       */
+/*   Updated: 2024/09/21 23:02:07 by trosinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	look_right(t_game *game);
 void	look_left(t_game *game);
 void	move_forward(t_game *game);
 void	move_backward(t_game *game);
+void	fill_with_color(mlx_image_t *img, u_int32_t color);
 
 void	my_keyhook(mlx_key_data_t keydata, void *param)
 {
@@ -42,11 +43,16 @@ void	my_keyhook(mlx_key_data_t keydata, void *param)
 		exit(0);
 	if (keydata.key == 257 && keydata.action == 1 && game->enter_flag == 0)
 	{
-	game->enter_flag = 1;
-	mlx_delete_image(game->mlx, game->img);
-	mlx_loop_hook(game->mlx, new_image, game);
+		game->enter_flag = 1;
+		mlx_delete_image(game->mlx, game->img);
+		game->img = mlx_new_image(game->mlx, WIDTH, HEIGHT);
+		fill_with_color(game->img, get_rgba(0, 0, 0, 255));
+		mlx_image_to_window(game->mlx, game->img, 0, 0);
+		mlx_loop_hook(game->mlx, new_image, game);
 	}
 }
+
+
 
 void	look_right(t_game *game)
 {

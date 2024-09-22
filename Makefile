@@ -3,13 +3,13 @@ NAME	:= cub3D
 CFLAGS	:= -Wextra -Wall -Werror -Wunreachable-code -Ofast -g
 LIBMLX	:= ./MLX42
 SRCS 	:= main.c checks.c garbage_collector.c errors.c utils.c parser.c \
-			key_hook.c mlx.c init.c player.c
+			key_hook.c mlx.c init.c player.c parser_utils.c
 LIBFT	:= ./libft
 GNL		:= ./gnl42
 # BONUS	:= bonus.c
 
 HEADERS	:= -I ./include -I $(LIBMLX)/include
-LIBS	:= $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm #-fsanitize=address
+LIBS	:= $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm -fsanitize=address
 INCLUDE := -L $(LIBFT) -lft -L $(GNL) -lgnl
 OBJS	:= ${SRCS:.c=.o}
 # BOBJS	:= ${BONUS:.c=.o}
