@@ -6,7 +6,7 @@
 /*   By: trosinsk <trosinsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 22:19:20 by trosinsk          #+#    #+#             */
-/*   Updated: 2024/09/21 21:48:52 by trosinsk         ###   ########.fr       */
+/*   Updated: 2024/09/22 14:38:37 by trosinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	main(int argc, char **argv)
 	mlx = init_mlx(game);
 	mlx_key_hook(mlx, &my_keyhook, game);
 	mlx_loop(mlx);
-	// mlx_terminate(mlx);
+	mlx_terminate(mlx);
 	return (free_garb(), 0);
 }
 

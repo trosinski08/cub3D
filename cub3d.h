@@ -6,7 +6,7 @@
 /*   By: trosinsk <trosinsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 22:00:20 by trosinsk          #+#    #+#             */
-/*   Updated: 2024/09/22 04:37:02 by trosinsk         ###   ########.fr       */
+/*   Updated: 2024/09/22 15:12:57 by trosinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@
 # define EMPTY 0
 # define PLAYER 3
 # define PI 3.14159265359
-# define FOV 180
+# define FOV 60
 # define SPEED 0.1
 # define ROTATE 0.1
 # define MINIMAP_SCALE 0.2
@@ -69,6 +69,8 @@ typedef struct s_player
 {
 	double	pos_x;
 	double	pos_y;
+	double	temp_x;
+	double	temp_y;
 	double	fov;
 	double	player_angle;
 	double	p_delta_x;
@@ -81,12 +83,13 @@ typedef struct s_ray
 	double	x;
 	double	hit_x;
 	double	temp_hx;
-	double	temp_hy;
+	double	temp_x;
 	double	temp_vx;
-	double	temp_vy;
 	double	y;
 	double	hit_y;
 	double	temp_y;
+	double	temp_hy;
+	double	temp_vy;
 	double	dir;
 	double	dist;
 	double	h_dist;

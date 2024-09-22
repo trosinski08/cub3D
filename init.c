@@ -6,7 +6,7 @@
 /*   By: trosinsk <trosinsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 01:15:23 by trosinsk          #+#    #+#             */
-/*   Updated: 2024/09/22 02:23:56 by trosinsk         ###   ########.fr       */
+/*   Updated: 2024/09/22 15:28:03 by trosinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,14 +96,14 @@ void	init_map(t_game *game, int height, char **map_str)
 				game->map.player_x = j;
 				game->map.player_y = i;
 				game->map.player_dir = map_str[i][j];
-				if (map_str[i][j] == 'N')
-					game->player.player_angle = 3 * PI / 2;
+				if (map_str[i][j] == 'S')
+					game->player.dir = PI / 2;
 				else if (map_str[i][j] == 'W')
-					game->player.player_angle = PI;
-				else if (map_str[i][j] == 'S')
-					game->player.player_angle = PI / 2;
+					game->player.dir = PI;
+				else if (map_str[i][j] == 'N')
+					game->player.dir = 3 * PI / 2;
 				else if (map_str[i][j] == 'E')
-					game->player.player_angle = 0;
+					game->player.dir = 0;
 			}
 			else
 				map[i][j] = -1;
@@ -137,13 +137,17 @@ t_player	player_init(t_game *game)
 {
 	t_player	player;
 
-	(void)game;
-	player.fov = FOV * PI / 180;
-	player.player_angle = 0;
+	player = game->player;
+	player.fov = FOV * M_PI / 180;
 	player.pos_x = ((game->map.player_x) * TILE_SZ) + TILE_SZ / 2;
 	player.pos_y = ((game->map.player_y) * TILE_SZ) + TILE_SZ / 2;
-	player.dir = 0;
 	player.p_delta_x = cos(player.dir) * 5;
 	player.p_delta_y = sin(player.dir) * 5;
+	printf("Player position: x: %f, y: %f\n", player.pos_x, player.pos_y);
+	printf("Player direction: %f\n", player.dir);
+	printf("Player angle: %f\n", player.player_angle);
+	printf("Player delta x: %f, delta y: %f\n", player.p_delta_x, player.p_delta_y);
+	printf("Player fov: %f\n", player.fov);
+	printf("Map direction: %c\n", game->map.player_dir);
 	return (player);
 }
