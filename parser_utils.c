@@ -6,7 +6,7 @@
 /*   By: trosinsk <trosinsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/21 17:48:44 by trosinsk          #+#    #+#             */
-/*   Updated: 2024/09/21 21:53:33 by trosinsk         ###   ########.fr       */
+/*   Updated: 2024/09/23 21:13:26 by trosinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,43 +66,13 @@ void	parse_map(t_game *game, char *line)
 		if (*line == '1' || *line == '0' || *line == ' ' || *line == '\n')
 			line++;
 		else if (*line == 'N' || *line == 'W' || *line == 'E' || *line == 'S')
-		{
-			line++;}
+			line++;
 		else
 			printf("Error\nInvalid character in map\n");
 	}
 }
-// {
-// 	int		i;
-// 	int		j;
-// 	int		len;
 
-// 	i = 0;
-// 	len = ft_strlen(line); //zapisz to w strukturze jesli jest dluzsza niz poprzednie
-// 	(void)game;
-// 	while (line[i])
-// 	{
-// 		if (line[i] == 49 || line[i] == 48 || line[i] == 10 || line[i] == 32)
-// 			i++;
-// 		if (line[i] == 'N' || line[i] == 'W' || line[i] == 'E' || line[i] == 'S')
-// 		{
-// 			game->map.player_x = i;
-// 			game->map.player_y = j;
-// 			game->map.player_dir = line[i];
-// 			i++;
-// 		}
-// 		else
-// 			printf("Error\nInvalid character in map\n");
-// game->map.map[game->map.player_y][game->map.player_x] = 2;
-// game->player.pos_x = game->map.player_x * TILE_SZ;
-// game->player.pos_y = game->map.player_y * TILE_SZ;
-// game->player.dir = game->map.player_dir;
-// game->player.p_delta_x = cos(game->player.dir) * 5;
-// game->player.p_delta_y = sin(game->player.dir) * 5;
-// game->draw_start = 1;
-// 	}
-// }
-
+//zapisz to w strukturze jesli jest dluzsza niz poprzednie linie
 //parsing mapy podziel na kroki, najpierw sprawdz czy linia jest poprawna
 //musisz zapamietac, czy to jest pierwsza linia, czy ostatnia, bo
 //to jest kluczowe dla obecnosci spacji i zer

@@ -6,7 +6,7 @@
 /*   By: trosinsk <trosinsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 22:19:20 by trosinsk          #+#    #+#             */
-/*   Updated: 2024/09/22 14:38:37 by trosinsk         ###   ########.fr       */
+/*   Updated: 2024/09/22 16:51:54 by trosinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int	main(int argc, char **argv)
 	mlx_terminate(mlx);
 	return (free_garb(), 0);
 }
-
 
 /*
 -mala mapa w lewym gornym rogu, ma pokazywac okreslony wymiar

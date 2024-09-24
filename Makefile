@@ -3,7 +3,8 @@ NAME	:= cub3D
 CFLAGS	:= -Wextra -Wall -Werror -Wunreachable-code -Ofast -g
 LIBMLX	:= ./MLX42
 SRCS 	:= main.c checks.c garbage_collector.c errors.c utils.c parser.c \
-			key_hook.c mlx.c init.c player.c parser_utils.c
+			key_hook.c mlx.c init.c player.c parser_utils.c setters.c \
+			vertical_ray.c horizontal_ray.c
 LIBFT	:= ./libft
 GNL		:= ./gnl42
 # BONUS	:= bonus.c
@@ -17,7 +18,9 @@ OBJS	:= ${SRCS:.c=.o}
 all: libmlx $(NAME)
 
 libmlx:
-	git clone https://github.com/codam-coding-college/MLX42.git 
+	if [ ! -d "$(LIBMLX)" ]; then \
+		git clone https://github.com/codam-coding-college/MLX42.git $(LIBMLX); \
+	fi
 	@cmake $(LIBMLX) -B $(LIBMLX)/build && make -sC $(LIBMLX)/build -j4
 
 %.o: %.c

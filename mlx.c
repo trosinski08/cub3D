@@ -6,39 +6,86 @@
 /*   By: trosinsk <trosinsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 00:58:36 by trosinsk          #+#    #+#             */
-/*   Updated: 2024/09/22 03:58:20 by trosinsk         ###   ########.fr       */
+/*   Updated: 2024/09/24 02:02:48 by trosinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	new_image(void *param);
+u_int32_t	check_hit(t_game *game);
+void		new_image(void *param);
+void		draw_mini_map(t_game *game);
 
 void	new_image(void *param)
 {
 	t_game		*game;
+	// int			screen_x;
+	// u_int32_t	color;
+
+	game = (t_game *)param;
+	// game->mini_flag = 0;
+	// screen_x = 0;
+	// game->ray.dir = game->player.dir - game->player.fov / 2;
+	// while (game->mini_flag < WIDTH)
+	// {
+	// 	color = check_hit(game);
+	// 	draw_wall(game, screen_x, color);
+	// 	screen_x++;
+	// 	game->ray.dir += game->player.fov / WIDTH;
+	// }
+	game->draw_start = 1;
+	draw_mini_map(game);
+	draw_ray(game);
+	draw_player(game);
+	mlx_image_to_window(game->mlx, game->img, 0, 0);
+}
+
+void	draw_mini_map(t_game *game)
+{
 	u_int32_t	color;
 	int			x;
 	int			y;
 
-	game = (t_game *)param;
-	game->img = mlx_new_image(game->mlx, WIDTH, HEIGHT);
 	x = -1;
 	while (++x < game->map.width * TILE_SZ)
 	{
 		y = -1;
 		while (++y < game->map.height * TILE_SZ)
 		{
-			color = game->map.floor;
-			// if (y % TILE_SZ == 0 || x % TILE_SZ == 0)
-			// 	color = get_rgba(0, 255, 126, 126);
-			// else 
-			if (game->map.map[y / TILE_SZ][x / TILE_SZ] && \
+			color = game->map.floor * 0.5;
+			if (y % TILE_SZ == 0 || x % TILE_SZ == 0 || \
+			y % TILE_SZ == TILE_SZ - 1 || x % TILE_SZ == TILE_SZ - 1)
+			{
+				color = get_rgba(0, 0, 0, 255);
+				if (game->map.floor == (int)color)
+					color = get_rgba(0, 126, 255, 255);
+			}
+			else if (game->map.map[y / TILE_SZ][x / TILE_SZ] && \
 			game->map.map[y / TILE_SZ][x / TILE_SZ] == WALL)
-				color = game->map.ceiling;
+				color = get_rgba(255, 255, 255, 255);
 			mlx_put_pixel(game->img, x, y, color);
 		}
 	}
-	draw_player(game);
-	mlx_image_to_window(game->mlx, game->img, 0, 0);
+}
+
+u_int32_t	check_hit(t_game *game)
+{
+	u_int32_t	color;
+
+	check_horizontal_hit(game);
+	check_vertical_hit(game);
+	if (game->ray.h_dist < game->ray.v_dist)
+	{
+		lin_interp(game, game->ray.temp_hx, game->ray.temp_hy);
+		game->ray.dist = game->ray.h_dist;
+		color = get_rgba(126, 126, 126, 126);
+	}
+	else
+	{
+		lin_interp(game, game->ray.temp_vx, game->ray.temp_vy);
+		game->ray.dist = game->ray.v_dist;
+		color = get_rgba(126, 126, 126, 255);
+	}
+	game->mini_flag = 0;
+	return (color);
 }

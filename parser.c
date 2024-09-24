@@ -6,7 +6,7 @@
 /*   By: trosinsk <trosinsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 01:01:33 by trosinsk          #+#    #+#             */
-/*   Updated: 2024/09/21 20:42:26 by trosinsk         ###   ########.fr       */
+/*   Updated: 2024/09/22 16:52:58 by trosinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ int	parser(t_game *game, char *file)
 		line = get_next_line(fd);
 	}
 	map = file_to_map(file, i);
-	// print_map(map);
 	if (i > 0)
 		init_map(game, i, map);
 	return (free(line), 1);
@@ -89,8 +88,6 @@ int	checker(t_game *game, int argc, char **argv)
 		return (printf("Error\nNo arguments given\n"), 0);
 	else if (argc > 2)
 		return (printf("Error\nToo many arguments\n"), 0);
-	//Your program must take as a first argument a scene description 
-	//file with the .cub extension.
 	if (argv[1] && (ft_strncmp(argv[1] + ft_strlen(argv[1]) - 4, \
 	".cub", 4) != 0) && ft_strlen(argv[1]) > 4)
 		return (printf("Error\nInvalid file extension\n"), 0);
@@ -124,9 +121,6 @@ void	parse_line(t_game *game, char *line)
 	else
 		printf("Error\nInvalid line in file\n");
 }
-
-
-
 
 /* ************************************************************************** 
 ◦ The map must be composed of only 6 possible characters: 0 for an empty space,

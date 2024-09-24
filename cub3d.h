@@ -6,7 +6,7 @@
 /*   By: trosinsk <trosinsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 22:00:20 by trosinsk          #+#    #+#             */
-/*   Updated: 2024/09/22 15:12:57 by trosinsk         ###   ########.fr       */
+/*   Updated: 2024/09/24 02:50:27 by trosinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@
 # include "libft/include/libft.h"
 # include "./gnl42/include/get_next_line.h"
 // # include "MLX42.h"
-
 
 # define MLX_KEY_W 87
 # define MLX_KEY_A 65
@@ -96,7 +95,6 @@ typedef struct s_ray
 	double	v_dist;
 }				t_ray;
 
-
 typedef struct s_game
 {
 	t_map		map;
@@ -115,7 +113,6 @@ typedef struct s_game
 	int			mini_flag;
 }				t_game;
 
-
 void		my_keyhook(mlx_key_data_t keydata, void *param);
 void		new_image(void *param);
 int			free_garb(void);
@@ -129,7 +126,17 @@ void		init_map(t_game *game, int height, char **map_str);
 void		parse_texture(t_game *game, char *line);
 void		parse_color(t_game *game, char *line);
 void		parse_map(t_game *game, char *line);
-void		fill_with_color(mlx_image_t *img, u_int32_t color);
+void		fill_with_color(mlx_image_t *img, u_int32_t color, \
+			u_int32_t color2);
+void		set_player(t_game *game, int i, int j, char dir);
+void		set_map(t_game *game, int i, int j, char *line);
+void		check_vertical_hit(t_game *game);
+void		check_horizontal_hit(t_game *game);
+double		fix_ang(double a);
+void		draw_ray(t_game *game);
+void		draw_wall(t_game *game, int x, u_int32_t color);
+void		draw_mini_map(t_game *game);
+void		lin_interp(t_game *game, double x2, double y2);
 
 // void	parse_resolution(t_game *game, char *line);
 
