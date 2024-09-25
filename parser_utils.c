@@ -6,7 +6,7 @@
 /*   By: trosinsk <trosinsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/21 17:48:44 by trosinsk          #+#    #+#             */
-/*   Updated: 2024/09/23 21:13:26 by trosinsk         ###   ########.fr       */
+/*   Updated: 2024/09/25 23:55:43 by trosinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +71,3 @@ void	parse_map(t_game *game, char *line)
 			printf("Error\nInvalid character in map\n");
 	}
 }
-
-//zapisz to w strukturze jesli jest dluzsza niz poprzednie linie
-//parsing mapy podziel na kroki, najpierw sprawdz czy linia jest poprawna
-//musisz zapamietac, czy to jest pierwsza linia, czy ostatnia, bo
-//to jest kluczowe dla obecnosci spacji i zer
-//nastepnie sprawdz czy jest dluzsza niz poprzednie, jesli tak to zapisz
-//sprawdz czy jest gracz, jesli tak to zapisz jego pozycje i kierunek
-//nastepnie zapisz mape w strukturze

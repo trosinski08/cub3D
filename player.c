@@ -6,7 +6,7 @@
 /*   By: trosinsk <trosinsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 01:14:26 by trosinsk          #+#    #+#             */
-/*   Updated: 2024/09/24 03:05:13 by trosinsk         ###   ########.fr       */
+/*   Updated: 2024/09/26 01:44:39 by trosinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,12 @@ void	draw_ray(t_game *game)
 		return ;
 	game->ray.dir = game->player.dir + game->player.fov / 2;
 	game->img = mlx_new_image(game->mlx, WIDTH, HEIGHT);
-	draw_mini_map(game);
 	while (screen_x < WIDTH)
 	{
 		check_horizontal_hit(game);
 		check_vertical_hit(game);
+		color = get_rgba(255, 255, 0, 126);
+		game->ray.dist = game->ray.v_dist;
 		if (game->ray.h_dist < game->ray.v_dist)
 		{
 			lin_interp(game, game->ray.temp_hx, game->ray.temp_hy);
@@ -61,11 +62,7 @@ void	draw_ray(t_game *game)
 			game->ray.dist = game->ray.h_dist;
 		}
 		else
-		{
 			lin_interp(game, game->ray.temp_vx, game->ray.temp_vy);
-			color = get_rgba(255, 255, 0, 126);
-			game->ray.dist = game->ray.v_dist;
-		}
 		game->ray.dir -= game->player.fov / WIDTH;
 		draw_wall(game, screen_x, color);
 		screen_x++;
@@ -123,14 +120,10 @@ void	draw_wall(t_game *game, int x, u_int32_t color)
 		i = TILE_SZ * game->map.height + 1;
 	while (i < t_pix)
 		mlx_put_pixel(game->img, x, i++, game->map.ceiling);
-	mlx_put_pixel(game->img, x, t_pix++, get_rgba(0, 0, 0, 255));
 	while (t_pix < b_pix)
-	{
-		// if (x % (WIDTH / game->map.width) == 0)
-		// 	color = get_rgba(0, 0, 0, 255);
 		mlx_put_pixel(game->img, x, t_pix++, color);
-	}
 	mlx_put_pixel(game->img, x, b_pix - 1, get_rgba(0, 0, 0, 255));
 	while (t_pix < HEIGHT)
 		mlx_put_pixel(game->img, x, t_pix++, game->map.floor);
 }
+	// mlx_put_pixel(game->img, x, t_pix++, get_rgba(0, 0, 0, 255));

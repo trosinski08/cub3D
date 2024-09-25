@@ -6,7 +6,7 @@
 /*   By: trosinsk <trosinsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 22:00:20 by trosinsk          #+#    #+#             */
-/*   Updated: 2024/09/24 02:50:27 by trosinsk         ###   ########.fr       */
+/*   Updated: 2024/09/26 00:04:18 by trosinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,6 @@
 # include "./gnl42/include/get_next_line.h"
 // # include "MLX42.h"
 
-# define MLX_KEY_W 87
-# define MLX_KEY_A 65
-# define MLX_KEY_S 83
-# define MLX_KEY_D 68
-# define MLX_KEY_ESC 256
 # define WALL 1
 # define EMPTY 0
 # define PLAYER 3

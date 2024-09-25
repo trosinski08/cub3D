@@ -6,7 +6,7 @@
 /*   By: trosinsk <trosinsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 00:58:36 by trosinsk          #+#    #+#             */
-/*   Updated: 2024/09/24 02:02:48 by trosinsk         ###   ########.fr       */
+/*   Updated: 2024/09/26 00:29:47 by trosinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,8 @@ void		draw_mini_map(t_game *game);
 void	new_image(void *param)
 {
 	t_game		*game;
-	// int			screen_x;
-	// u_int32_t	color;
 
 	game = (t_game *)param;
-	// game->mini_flag = 0;
-	// screen_x = 0;
-	// game->ray.dir = game->player.dir - game->player.fov / 2;
-	// while (game->mini_flag < WIDTH)
-	// {
-	// 	color = check_hit(game);
-	// 	draw_wall(game, screen_x, color);
-	// 	screen_x++;
-	// 	game->ray.dir += game->player.fov / WIDTH;
-	// }
 	game->draw_start = 1;
 	draw_mini_map(game);
 	draw_ray(game);
