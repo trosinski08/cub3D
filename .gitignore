@@ -34,6 +34,6 @@ secrets.yml
 MLX42/
 
 # ignore compiled files
-miniRT
-gnl42
-libft
+# miniRT
+# gnl42
+# libft
