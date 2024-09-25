@@ -1,0 +1,13 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "lldb",
+      "request": "launch",
+      "args": [],
+      "cwd": "/Users/trosinsk/Desktop/cub3D",
+      "program": "/Users/trosinsk/Desktop/cub3D/build/Debug/outDebug"
+    }
+  ]
+}

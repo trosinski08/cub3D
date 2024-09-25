@@ -22,7 +22,6 @@ Thumbs.db
 secrets.yml
 
 # Ignore all hidden files
-.*
 
 # Ignore all .o files
 *.o
