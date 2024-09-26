@@ -6,17 +6,16 @@
 /*   By: trosinsk <trosinsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 01:14:26 by trosinsk          #+#    #+#             */
-/*   Updated: 2024/09/26 22:06:27 by trosinsk         ###   ########.fr       */
+/*   Updated: 2024/09/26 22:58:10 by trosinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-uint32_t	set_h_dist(t_game *game, double x, double y);
-void		draw_player(t_game *game);
-void		draw_ray(t_game *game);
-void		lin_interp(t_game *game, double x2, double y2);
-void		draw_wall(t_game *game, int x, u_int32_t color);
+void	draw_player(t_game *game);
+void	draw_ray(t_game *game);
+void	lin_interp(t_game *game, double x2, double y2);
+void	draw_wall(t_game *game, int x, u_int32_t color);
 
 void	draw_player(t_game *game)
 {
@@ -55,9 +54,13 @@ void	draw_ray(t_game *game)
 		color = get_rgba(255, 255, 0, 126);
 		game->ray.dist = game->ray.v_dist;
 		if (game->ray.h_dist < game->ray.v_dist)
-			color = set_h_dist(game, game->ray.temp_hx, game->ray.temp_hy);
-		else
-			lin_interp(game, game->ray.temp_vx, game->ray.temp_vy);
+		{
+			// lin_interp(game, game->ray.temp_hx, game->ray.temp_hy);
+			color = get_rgba(0, 255, 255, 126);
+			game->ray.dist = game->ray.h_dist;
+		}
+		// else
+			// lin_interp(game, game->ray.temp_vx, game->ray.temp_vy);
 		game->ray.dir -= game->player.fov / WIDTH;
 		draw_wall(game, screen_x, color);
 		screen_x++;
@@ -121,11 +124,4 @@ void	draw_wall(t_game *game, int x, u_int32_t color)
 	while (t_pix < HEIGHT)
 		mlx_put_pixel(game->img, x, t_pix++, game->map.floor);
 }
-// mlx_put_pixel(game->img, x, t_pix++, get_rgba(0, 0, 0, 255));
-
-uint32_t	set_h_dist(t_game *game, double x, double y)
-{
-	lin_interp(game, game->ray.temp_hx, game->ray.temp_hy);
-	game->ray.dist = game->ray.h_dist;
-	return (color = get_rgba(0, 255, 255, 126));
-}
+	// mlx_put_pixel(game->img, x, t_pix++, get_rgba(0, 0, 0, 255));
