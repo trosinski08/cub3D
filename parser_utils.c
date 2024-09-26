@@ -6,7 +6,7 @@
 /*   By: trosinsk <trosinsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/21 17:48:44 by trosinsk          #+#    #+#             */
-/*   Updated: 2024/09/26 23:33:22 by trosinsk         ###   ########.fr       */
+/*   Updated: 2024/09/26 23:56:16 by trosinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,10 +87,11 @@ int	check_if_walls_are_closed(t_game *game)
 			{
 				if (i == 0 || i == game->map.height - 1 || j == 0 \
 				|| j == game->map.width - 1)
-					return (printf("Error\nMap is not closed\n"));
-				if (game->map.map[i - 1][j] == ' ' || game->map.map[i + 1][j] == ' ' \
-				|| game->map.map[i][j - 1] == ' ' || game->map.map[i][j + 1] == ' ')
-					return (printf("Error\nMap is not closed\n"));
+					return (printf("Error\nMap is not closed\n"), 0);
+				if (game->map.map[i - 1][j] == ' ' || \
+			game->map.map[i + 1][j] == ' ' \
+			|| game->map.map[i][j - 1] == ' ' || game->map.map[i][j + 1] == ' ')
+					return (printf("Error\nMap is not closed\n"), 0);
 			}
 			j++;
 		}
