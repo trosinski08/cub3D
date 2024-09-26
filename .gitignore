@@ -22,12 +22,12 @@ Thumbs.db
 secrets.yml
 
 # Ignore all hidden files
-
+.*
 # Ignore all .o files
 *.o
 
-# But keep the .gitignore file (remove "!" for final push to school)
-!/.gitignore
+# # But keep the .gitignore file (remove "!" for final push to school)
+# !/.gitignore
 
 # MLX ignored
 MLX42/

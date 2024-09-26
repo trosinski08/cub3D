@@ -6,7 +6,7 @@
 /*   By: trosinsk <trosinsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/21 17:48:44 by trosinsk          #+#    #+#             */
-/*   Updated: 2024/09/25 23:55:43 by trosinsk         ###   ########.fr       */
+/*   Updated: 2024/09/26 23:33:22 by trosinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,4 +70,31 @@ void	parse_map(t_game *game, char *line)
 		else
 			printf("Error\nInvalid character in map\n");
 	}
+}
+
+int	check_if_walls_are_closed(t_game *game)
+{
+	int		i;
+	int		j;
+
+	i = 0;
+	while (i < game->map.height)
+	{
+		j = 0;
+		while (j < game->map.width)
+		{
+			if (game->map.map[i][j] == ' ')
+			{
+				if (i == 0 || i == game->map.height - 1 || j == 0 \
+				|| j == game->map.width - 1)
+					return (printf("Error\nMap is not closed\n"));
+				if (game->map.map[i - 1][j] == ' ' || game->map.map[i + 1][j] == ' ' \
+				|| game->map.map[i][j - 1] == ' ' || game->map.map[i][j + 1] == ' ')
+					return (printf("Error\nMap is not closed\n"));
+			}
+			j++;
+		}
+		i++;
+	}
+	return (1);
 }
