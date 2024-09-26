@@ -6,7 +6,7 @@
 /*   By: trosinsk <trosinsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 22:00:20 by trosinsk          #+#    #+#             */
-/*   Updated: 2024/09/26 00:04:18 by trosinsk         ###   ########.fr       */
+/*   Updated: 2024/09/26 22:02:42 by trosinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,8 @@ void		draw_ray(t_game *game);
 void		draw_wall(t_game *game, int x, u_int32_t color);
 void		draw_mini_map(t_game *game);
 void		lin_interp(t_game *game, double x2, double y2);
+void		check_horizontal_hit(t_game *game);
+void		check_vertical_hit(t_game *game);
 
 // void	parse_resolution(t_game *game, char *line);
 
