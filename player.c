@@ -6,16 +6,19 @@
 /*   By: trosinsk <trosinsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 01:14:26 by trosinsk          #+#    #+#             */
-/*   Updated: 2024/09/26 22:58:10 by trosinsk         ###   ########.fr       */
+/*   Updated: 2024/09/27 20:20:57 by trosinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	draw_player(t_game *game);
-void	draw_ray(t_game *game);
-void	lin_interp(t_game *game, double x2, double y2);
-void	draw_wall(t_game *game, int x, u_int32_t color);
+void			draw_player(t_game *game);
+void			draw_ray(t_game *game);
+void			lin_interp(t_game *game, double x2, double y2);
+void			draw_wall(t_game *game, int x, int flag);
+void			get_texture(t_game *game, int x, int y, int color);
+mlx_texture_t	*set_texture_direction(t_game *game, int flag);
+
 
 void	draw_player(t_game *game)
 {
@@ -41,11 +44,15 @@ void	draw_ray(t_game *game)
 {
 	int			screen_x;
 	u_int32_t	color;
+	int			flag;
 
 	screen_x = 0;
 	if (game->draw_start == 0)
 		return ;
+	flag = 0;
 	game->ray.dir = game->player.dir + game->player.fov / 2;
+	printf("img: %p\n", game->img);
+	printf("mlx: %p\n", game->mlx);
 	game->img = mlx_new_image(game->mlx, WIDTH, HEIGHT);
 	while (screen_x < WIDTH)
 	{
@@ -55,16 +62,18 @@ void	draw_ray(t_game *game)
 		game->ray.dist = game->ray.v_dist;
 		if (game->ray.h_dist < game->ray.v_dist)
 		{
-			// lin_interp(game, game->ray.temp_hx, game->ray.temp_hy);
+			lin_interp(game, game->ray.temp_hx, game->ray.temp_hy);
 			color = get_rgba(0, 255, 255, 126);
 			game->ray.dist = game->ray.h_dist;
+			flag = 1;
 		}
-		// else
-			// lin_interp(game, game->ray.temp_vx, game->ray.temp_vy);
+		else
+			lin_interp(game, game->ray.temp_vx, game->ray.temp_vy);
 		game->ray.dir -= game->player.fov / WIDTH;
-		draw_wall(game, screen_x, color);
+		draw_wall(game, screen_x, flag);
 		screen_x++;
 	}
+	game->draw_start = 0;
 	mlx_image_to_window(game->mlx, game->img, 0, 0);
 }
 
@@ -96,7 +105,7 @@ void	lin_interp(t_game *game, double x2, double y2)
 	}
 }
 
-void	draw_wall(t_game *game, int x, u_int32_t color)
+void	draw_wall(t_game *game, int x, int flag)
 {
 	double	h;
 	double	b_pix;
@@ -118,10 +127,63 @@ void	draw_wall(t_game *game, int x, u_int32_t color)
 		i = TILE_SZ * game->map.height + 1;
 	while (i < t_pix)
 		mlx_put_pixel(game->img, x, i++, game->map.ceiling);
-	while (t_pix < b_pix)
-		mlx_put_pixel(game->img, x, t_pix++, color);
-	mlx_put_pixel(game->img, x, b_pix - 1, get_rgba(0, 0, 0, 255));
+	while (t_pix++ < b_pix)
+		{mlx_put_pixel(game->img, x, t_pix, get_rgba(0, 255, 0, 255));
+	// w tym miejscu potrzebuję zaimplementować tekstury
+		get_texture(game, x, t_pix++, flag);}
 	while (t_pix < HEIGHT)
 		mlx_put_pixel(game->img, x, t_pix++, game->map.floor);
 }
 	// mlx_put_pixel(game->img, x, t_pix++, get_rgba(0, 0, 0, 255));
+void	get_texture(t_game *game, int x, int y, int flag)
+{
+	mlx_texture_t	*texture;
+	u_int32_t		color;
+	int				x_o;
+	int				y_o;
+
+	texture = set_texture_direction(game, flag);
+	printf("texture.width: %d\ntexture.height: %d\n", texture->width, texture->height);
+	x_o = (int)(game->ray.hit_x * texture->width) % texture->width;
+	y_o = (int)(game->ray.hit_y * texture->height) % texture->height;
+	printf("\n\nx_o: %d\ny_o: %d\n\n", x_o, y_o);
+	// printf("\n\ngame->player.dir: %f\n\n", game->player.dir);
+	// i need to read the color from the texture
+	// typedef struct mlx_texture
+// {
+	// uint32_t	width;
+	// uint32_t	height;
+	// uint8_t		bytes_per_pixel;
+	// uint8_t*	pixels;
+// }	mlx_texture_t;
+	color = texture->pixels[y_o * texture->width + x_o];
+	mlx_put_pixel(game->img, x, y, color);
+}
+
+mlx_texture_t	*set_texture_direction(t_game *game, int flag)
+{
+	mlx_texture_t	*texture;
+
+//flag = 0 vertical distance is smaller;
+//flag = 1 horizontal distance is smaller;
+	game->map.t_no = mlx_load_png(game->map.no);
+	game->map.t_so = mlx_load_png(game->map.so);
+	game->map.t_we = mlx_load_png(game->map.we);
+	game->map.t_ea = mlx_load_png(game->map.ea);
+	if (flag == 0)
+	{
+		if (game->ray.dir > 0 && game->ray.dir < PI)
+			texture = game->map.t_no;
+		else
+			texture = game->map.t_so;
+	}
+	else
+	{
+		if (game->ray.dir > PI / 2 && game->ray.dir < 3 * PI / 2)
+			texture = game->map.t_ea;
+		else
+			texture = game->map.t_we;
+	}
+	printf("texture.width: %d\ntexture.height: %d\n", texture->width, texture->height);
+	return (texture);
+}

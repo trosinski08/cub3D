@@ -6,7 +6,7 @@
 /*   By: trosinsk <trosinsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 17:20:26 by trosinsk          #+#    #+#             */
-/*   Updated: 2024/09/24 02:27:52 by trosinsk         ###   ########.fr       */
+/*   Updated: 2024/09/27 01:45:03 by trosinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,6 @@ void	set_player(t_game *game, int i, int j, char dir)
 		game->player.dir = 3 * PI / 2;
 	else if (dir == 'E')
 		game->player.dir = 0;
-	printf("Player position: %d %d\n", game->map.player_x, game->map.player_y);
-	printf("Player direction: %c\n", game->map.player_dir);
-	printf("player dir: %f\n", game->player.dir);
 }
 
 void	set_map(t_game *game, int i, int j, char *line)
