@@ -6,7 +6,7 @@
 /*   By: trosinsk <trosinsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 01:01:33 by trosinsk          #+#    #+#             */
-/*   Updated: 2024/09/27 01:48:32 by trosinsk         ###   ########.fr       */
+/*   Updated: 2024/09/27 20:30:39 by trosinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,11 +98,7 @@ int	checker(t_game *game, int argc, char **argv)
 	if (open(argv[1], O_RDONLY) == -1)
 		return (printf("Error\nFailed to open file\n"), 0);
 	if (parser(game, argv[1]) == 0)
-		return (printf("Map parsing failed\n"), 0); 
-	if (game->map.width == 0 || game->map.height == 0)
-		return (printf("Error\nInvalid map\n"), 0);
-	// if (check_if_walls_are_closed(game) == 0)
-		// return (printf("Error\nMap is not closed\n"), 0);
+		return (printf("Map parsing failed\n"), 0);
 	return (1);
 }
 
