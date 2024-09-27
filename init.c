@@ -6,7 +6,7 @@
 /*   By: trosinsk <trosinsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 01:15:23 by trosinsk          #+#    #+#             */
-/*   Updated: 2024/09/24 02:24:12 by trosinsk         ###   ########.fr       */
+/*   Updated: 2024/09/27 20:23:26 by trosinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ t_game	*init_game(void)
 	game->line_len = 0;
 	game->endian = 0;
 	game->color = 0;
-	game->draw_start = 0;
+	game->draw_start = 1;
 	game->enter_flag = 0;
 	game->mini_flag = 0;
 	return (game);

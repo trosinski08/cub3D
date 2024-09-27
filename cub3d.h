@@ -6,7 +6,7 @@
 /*   By: trosinsk <trosinsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 22:00:20 by trosinsk          #+#    #+#             */
-/*   Updated: 2024/09/26 22:02:42 by trosinsk         ###   ########.fr       */
+/*   Updated: 2024/09/27 20:13:50 by trosinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,19 +44,23 @@
 
 typedef struct s_map
 {
-	int		**map;
-	int		width;
-	int		height;
-	int		player_x;
-	int		player_y;
-	int		player_dir;
-	char	*no;
-	char	*so;
-	char	*we;
-	char	*ea;
-	char	*s;
-	int		floor;
-	int		ceiling;
+	mlx_texture_t	*t_no;
+	mlx_texture_t	*t_so;
+	mlx_texture_t	*t_we;
+	mlx_texture_t	*t_ea;
+	int				**map;
+	int				width;
+	int				height;
+	int				player_x;
+	int				player_y;
+	int				player_dir;
+	char			*no;
+	char			*so;
+	char			*we;
+	char			*ea;
+	char			*s;
+	int				floor;
+	int				ceiling;
 }				t_map;
 
 typedef struct s_player
@@ -129,11 +133,10 @@ void		check_vertical_hit(t_game *game);
 void		check_horizontal_hit(t_game *game);
 double		fix_ang(double a);
 void		draw_ray(t_game *game);
-void		draw_wall(t_game *game, int x, u_int32_t color);
+void		draw_wall(t_game *game, int x, int flag);
 void		draw_mini_map(t_game *game);
 void		lin_interp(t_game *game, double x2, double y2);
-void		check_horizontal_hit(t_game *game);
-void		check_vertical_hit(t_game *game);
+int			check_if_walls_are_closed(t_game *game);
 
 // void	parse_resolution(t_game *game, char *line);
 

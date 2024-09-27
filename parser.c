@@ -6,7 +6,7 @@
 /*   By: trosinsk <trosinsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 01:01:33 by trosinsk          #+#    #+#             */
-/*   Updated: 2024/09/22 16:52:58 by trosinsk         ###   ########.fr       */
+/*   Updated: 2024/09/27 01:48:32 by trosinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int		checker(t_game *game, int argc, char **argv);
 void	print_map(char **map);
 void	parse_line(t_game *game, char *line);
 char	**file_to_map(char *file, int lines);
+int		check_if_map_is_valid(t_game *game);
 
 int	parser(t_game *game, char *file)
 {
@@ -41,6 +42,9 @@ int	parser(t_game *game, char *file)
 	map = file_to_map(file, i);
 	if (i > 0)
 		init_map(game, i, map);
+	close(fd);
+	if (check_if_map_is_valid(game) == 0)
+		return (0);
 	return (free(line), 1);
 }
 
@@ -94,7 +98,11 @@ int	checker(t_game *game, int argc, char **argv)
 	if (open(argv[1], O_RDONLY) == -1)
 		return (printf("Error\nFailed to open file\n"), 0);
 	if (parser(game, argv[1]) == 0)
-		return (printf("Map parsing failed\n"), 0);
+		return (printf("Map parsing failed\n"), 0); 
+	if (game->map.width == 0 || game->map.height == 0)
+		return (printf("Error\nInvalid map\n"), 0);
+	// if (check_if_walls_are_closed(game) == 0)
+		// return (printf("Error\nMap is not closed\n"), 0);
 	return (1);
 }
 
@@ -146,3 +154,30 @@ as long as it respects the rules of the map.
 7
 cub3D My first RayCast
 */
+
+int	check_if_map_is_valid(t_game *game)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+//sprawdz czy w pierwszej i ostatniejn kolumnie jest 0
+// sprawdz czy w pierwszym i ostatnim wierszu jest 0
+	while (i < game->map.height)
+	{
+		j = 0;
+		while (j < game->map.width)
+		{
+			if (game->map.map[i][j] == 0)
+			{
+				if (i == 0 || i == game->map.height - 1)
+					return (printf("Error\nMap is not closed\n"), 0);
+				if (j == 0 || j == game->map.width - 1)
+					return (printf("Error\nMap is not closed\n"), 0);
+			}
+			j++;
+		}
+		i++;
+	}
+	return (1);
+}

@@ -6,7 +6,7 @@
 /*   By: trosinsk <trosinsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/21 17:48:44 by trosinsk          #+#    #+#             */
-/*   Updated: 2024/09/25 23:55:43 by trosinsk         ###   ########.fr       */
+/*   Updated: 2024/09/27 01:31:25 by trosinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,3 +71,4 @@ void	parse_map(t_game *game, char *line)
 			printf("Error\nInvalid character in map\n");
 	}
 }
+
