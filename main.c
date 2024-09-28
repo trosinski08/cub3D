@@ -6,7 +6,7 @@
 /*   By: trosinsk <trosinsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 22:19:20 by trosinsk          #+#    #+#             */
-/*   Updated: 2024/09/22 16:51:54 by trosinsk         ###   ########.fr       */
+/*   Updated: 2024/09/28 16:14:14 by trosinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,13 @@ int	main(int argc, char **argv)
 	mlx_key_hook(mlx, &my_keyhook, game);
 	mlx_loop(mlx);
 	mlx_terminate(mlx);
+	printf("GAME OVER\n");
 	return (free_garb(), 0);
 }
 
 /*
--mala mapa w lewym gornym rogu, ma pokazywac okreslony wymiar
--W S A D zalezne od kierunku patrzenia
--staly rozmiar elementow jednak potrzebny, lekko popraw logike
-popracuj nad parsingiem i checkami
--zaimplementuj garb_collector
+- additional checks on map, if there is just one player, if every 
+texture exist, if you have color of f and c start
+-to imlement garb_collector
+- free all mallocs
 */

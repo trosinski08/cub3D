@@ -3,7 +3,7 @@ NAME	:= cub3D
 CFLAGS	:= -Wextra -Wall -Werror -Wunreachable-code -Ofast -g
 LIBMLX	:= ./MLX42
 SRCS 	:= main.c checks.c garbage_collector.c errors.c utils.c parser.c \
-			key_hook.c mlx.c init.c player.c parser_utils.c setters.c \
+			key_hook.c draw.c init.c raytrace.c parser_utils.c setters.c \
 			vertical_ray.c horizontal_ray.c
 LIBFT	:= ./libft
 GNL		:= ./gnl42

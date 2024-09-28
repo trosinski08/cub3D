@@ -6,7 +6,7 @@
 /*   By: trosinsk <trosinsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 01:15:23 by trosinsk          #+#    #+#             */
-/*   Updated: 2024/09/27 23:10:18 by trosinsk         ###   ########.fr       */
+/*   Updated: 2024/09/28 16:06:25 by trosinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,16 @@ mlx_t	*init_mlx(t_game *game)
 	mlx_put_string(mlx, "Cub3D in progres!", WIDTH / 2 - 150, HEIGHT / 2 - 20);
 	mlx_put_string(mlx, "Press ESC to exit or Enter to continue\n:)", \
 	WIDTH / 2 - 150, HEIGHT / 2 + 20);
+	mlx_put_string(mlx, "Press W A S D to move", \
+	WIDTH / 2 - 150, HEIGHT / 2 + 100);
+	mlx_put_string(mlx, "Press arrows left/right to rotate", \
+	WIDTH / 2 - 150, HEIGHT / 2 + 140);
+	mlx_put_string(mlx, "Enjoy!", WIDTH / 2 - 150, HEIGHT / 2 + 180);
 	return (mlx);
 }
+	// mlx_image_to_window(mlx, img, 0, 0);
+	// mlx_put_string(mlx, "Press M to show/hide minimap", 
+	// WIDTH / 2 - 150, HEIGHT / 2 + 60);
 
 t_game	*init_game(void)
 {
@@ -46,13 +54,7 @@ t_game	*init_game(void)
 	game->map.height = 0;
 	game->map.map = NULL;
 	game->mlx = NULL;
-	game->win = NULL;
 	game->img = NULL;
-	game->addr = NULL;
-	game->bpp = 0;
-	game->line_len = 0;
-	game->endian = 0;
-	game->color = 0;
 	game->draw_start = 0;
 	game->enter_flag = 0;
 	game->mini_flag = 0;

@@ -6,18 +6,42 @@
 /*   By: trosinsk <trosinsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 01:01:33 by trosinsk          #+#    #+#             */
-/*   Updated: 2024/09/28 13:37:16 by trosinsk         ###   ########.fr       */
+/*   Updated: 2024/09/28 16:12:07 by trosinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+/* ************************************************************************** 
+◦ The map must be composed of only 6 possible characters: 0 for an empty space,
+1 for a wall, and N,S,E or W for the player’s start position and spawning
+orientation.
+This is a simple valid map:
+111111
+100101
+101001
+1100N1
+111111
+◦ The map must be closed/surrounded by walls, if not the program must return
+an error.
+◦ Except for the map content, each type of element can be separated by one or
+more empty line(s).
+◦ Except for the map content which always has to be the last, each type of
+element can be set in any order in the file.
+◦ Except for the map, each type of information from an element can be separated
+by one or more space(s).
+◦ The map must be parsed as it looks in the file. Spaces are a valid part of the
+map and are up to you to handle. You must be able to parse any kind of map,
+as long as it respects the rules of the map.
+7
+cub3D My first RayCast
+*/
 #include "cub3d.h"
 
 int		parser(t_game *game, char *file);
 int		checker(t_game *game, int argc, char **argv);
-void	print_map(char **map);
 void	parse_line(t_game *game, char *line);
 char	**file_to_map(char *file, int lines);
 int		check_if_map_is_valid(t_game *game);
+// void	print_map(char **map);
 
 int	parser(t_game *game, char *file)
 {
@@ -88,8 +112,6 @@ int	checker(t_game *game, int argc, char **argv)
 	return (1);
 }
 
-// if (line[0] == 'R')
-// 	parse_resolution(game, line);
 void	parse_line(t_game *game, char *line)
 {
 	if (line[0] == 'N' && line[1] == 'O')
@@ -111,31 +133,6 @@ void	parse_line(t_game *game, char *line)
 	else
 		printf("Error\nInvalid line in file\n");
 }
-
-/* ************************************************************************** 
-◦ The map must be composed of only 6 possible characters: 0 for an empty space,
-1 for a wall, and N,S,E or W for the player’s start position and spawning
-orientation.
-This is a simple valid map:
-111111
-100101
-101001
-1100N1
-111111
-◦ The map must be closed/surrounded by walls, if not the program must return
-an error.
-◦ Except for the map content, each type of element can be separated by one or
-more empty line(s).
-◦ Except for the map content which always has to be the last, each type of
-element can be set in any order in the file.
-◦ Except for the map, each type of information from an element can be separated
-by one or more space(s).
-◦ The map must be parsed as it looks in the file. Spaces are a valid part of the
-map and are up to you to handle. You must be able to parse any kind of map,
-as long as it respects the rules of the map.
-7
-cub3D My first RayCast
-*/
 
 int	check_if_map_is_valid(t_game *game)
 {
