@@ -6,7 +6,7 @@
 /*   By: trosinsk <trosinsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 17:24:17 by trosinsk          #+#    #+#             */
-/*   Updated: 2024/09/28 13:36:27 by trosinsk         ###   ########.fr       */
+/*   Updated: 2024/09/28 20:12:25 by trosinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	check_vertical_hit(t_game *game)
 	tang = tan(game->ray.dir);
 	if (game->ray.dir > PI / 2 && game->ray.dir < 3 * PI / 2)
 		calc_v_step(game, tang, -1);
-	else if (cos(game->ray.dir) > 0.001)
+	else if (game->ray.dir < PI / 2 || game->ray.dir > 3 * PI / 2)
 		calc_v_step(game, tang, 1);
 	else
 	{
@@ -35,7 +35,10 @@ void	check_vertical_hit(t_game *game)
 		i = game->map.width;
 	}
 	while (i < game->map.width)
-		vertical_dist(game, i++);
+	{
+		vertical_dist(game, i);
+		i++;
+	}
 }
 
 static	void	calc_v_step(t_game *game, double tang, int direction)
@@ -60,7 +63,7 @@ void	vertical_dist(t_game *game, int i)
 	game->ray.hit_y = game->ray.y / TILE_SZ;
 	if (game->ray.hit_x >= 0 && game->ray.hit_y >= 0 && game->ray.hit_x <= \
 	game->map.width && game->ray.hit_y <= game->map.height && game->map.map \
-	[(int)game->ray.hit_y][(int)game->ray.hit_x] != 0)
+	[(int)game->ray.hit_y][(int)game->ray.hit_x] == 1)
 	{
 		game->ray.temp_vx = game->ray.x;
 		game->ray.temp_vy = game->ray.y;

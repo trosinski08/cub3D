@@ -1,7 +1,8 @@
 NO ./textures/photo1.png
-SO ./textures/photo2.png
-WE ./textures/photo3.png
-EA ./textures/photo4.png
+SO ./textures/photo1.png
+WE ./textures/photo2.png
+EA ./textures/photo2.png
+
 
 
 F 126,126,255

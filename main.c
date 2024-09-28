@@ -6,7 +6,7 @@
 /*   By: trosinsk <trosinsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 22:19:20 by trosinsk          #+#    #+#             */
-/*   Updated: 2024/09/28 16:14:14 by trosinsk         ###   ########.fr       */
+/*   Updated: 2024/09/28 22:09:14 by trosinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ int	main(int argc, char **argv)
 /*
 - additional checks on map, if there is just one player, if every 
 texture exist, if you have color of f and c start
--to imlement garb_collector
+if (open(map.no, O_DIRECTOIRY)  == -1)
+
 - free all mallocs
+-to imlement garb_collector
 */

@@ -6,7 +6,7 @@
 /*   By: trosinsk <trosinsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 00:51:36 by trosinsk          #+#    #+#             */
-/*   Updated: 2024/09/28 16:15:39 by trosinsk         ###   ########.fr       */
+/*   Updated: 2024/09/28 19:03:28 by trosinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ void	my_keyhook(mlx_key_data_t keydata, void *param)
 
 	game = (t_game *)param;
 	step = TILE_SZ / 8;
+	if (keydata.action == 2)
+		step = TILE_SZ / 4;
 	game->player.p_delta_x = cos(game->player.dir) * step;
 	game->player.p_delta_y = -sin(game->player.dir) * step;
-	if (keydata.action == 2)
-		step = (TILE_SZ / 4) * 3;
 	game->player.dir = fix_ang(game->player.dir);
 	movements(game, keydata, step);
 	if ((keydata.key == MLX_KEY_RIGHT || keydata.key == MLX_KEY_LEFT) \

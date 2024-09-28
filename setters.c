@@ -6,7 +6,7 @@
 /*   By: trosinsk <trosinsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 17:20:26 by trosinsk          #+#    #+#             */
-/*   Updated: 2024/09/28 00:54:12 by trosinsk         ###   ########.fr       */
+/*   Updated: 2024/09/28 21:55:32 by trosinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,15 @@ void	set_map(t_game *game, int i, int j, char *line)
 	if (j > game->map.width)
 		game->map.width = j - 1;
 	if (line[j] == ' ')
-		game->map.map[i][j] = 2;
+	{
+		if (i == 0 || i == game->map.height || j == 0 || \
+		j == game->map.width || (game->map.map[i][j + 1] && \
+		game->map.map[i][j + 1] == 1) || (game->map.map[i][j - 1] && \
+		game->map.map[i][j - 1] == 1))
+			game->map.map[i][j] = 1;
+		else
+			game->map.map[i][j] = 0;
+	}
 	else if (line[j] == '1' || line[j] == '0')
 		game->map.map[i][j] = line[j] - '0';
 	else if (line[j] == 'N' || line[j] == 'W' || line[j] == 'E' \

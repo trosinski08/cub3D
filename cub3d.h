@@ -6,7 +6,7 @@
 /*   By: trosinsk <trosinsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 22:00:20 by trosinsk          #+#    #+#             */
-/*   Updated: 2024/09/28 17:12:32 by trosinsk         ###   ########.fr       */
+/*   Updated: 2024/09/28 19:10:28 by trosinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,11 +99,12 @@ typedef struct s_ray
 typedef struct s_tex
 {
 	mlx_texture_t	*addr;
+	u_int32_t		tex_index;
 	unsigned int	*arr;
 	double			texture_step;
 	double			x_texture;
 	double			y_texture;
-	int				tex_index;
+	int				h;
 }			t_tex;
 
 typedef struct s_game
