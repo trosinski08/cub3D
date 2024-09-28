@@ -6,7 +6,7 @@
 /*   By: trosinsk <trosinsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 15:45:24 by trosinsk          #+#    #+#             */
-/*   Updated: 2024/09/21 22:55:40 by trosinsk         ###   ########.fr       */
+/*   Updated: 2024/09/28 13:35:42 by trosinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,10 @@ void	*ft_memset(void *s, int c, size_t n)
 
 	i = 0;
 	temp = (char *)s;
-	printf("S: %d\n", c);
 	write(1, &c, 1);
 	while (i < n)
 	{
 		temp[i] = c;
-		printf("S: %d\n", temp[i]);
 		i++;
 	}
 	return (s);

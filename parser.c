@@ -6,7 +6,7 @@
 /*   By: trosinsk <trosinsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 01:01:33 by trosinsk          #+#    #+#             */
-/*   Updated: 2024/09/28 00:11:49 by trosinsk         ###   ########.fr       */
+/*   Updated: 2024/09/28 13:37:16 by trosinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,20 +70,6 @@ char	**file_to_map(char *file, int lines)
 	}
 	map[i] = NULL;
 	return (map);
-}
-
-void	print_map(char **map)
-{
-	int	i;
-
-	i = 0;
-	printf("//****************Map********************//\n");
-	while (map[i])
-	{
-		printf("%s\n", map[i]);
-		i++;
-	}
-	printf("//***************************************//\n");
 }
 
 int	checker(t_game *game, int argc, char **argv)
@@ -157,8 +143,6 @@ int	check_if_map_is_valid(t_game *game)
 	int	j;
 
 	i = 0;
-//sprawdz czy w pierwszej i ostatniejn kolumnie jest 0
-// sprawdz czy w pierwszym i ostatnim wierszu jest 0
 	while (i < game->map.height)
 	{
 		j = 0;
@@ -177,3 +161,17 @@ int	check_if_map_is_valid(t_game *game)
 	}
 	return (1);
 }
+
+// void	print_map(char **map)
+// {
+// 	int	i;
+
+// 	i = 0;
+// 	printf("//****************Map********************//\n");
+// 	while (map[i])
+// 	{
+// 		printf("%s\n", map[i]);
+// 		i++;
+// 	}
+// 	printf("//***************************************//\n");
+// }

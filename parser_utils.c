@@ -6,7 +6,7 @@
 /*   By: trosinsk <trosinsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/21 17:48:44 by trosinsk          #+#    #+#             */
-/*   Updated: 2024/09/27 22:23:31 by trosinsk         ###   ########.fr       */
+/*   Updated: 2024/09/28 13:37:23 by trosinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,4 +99,3 @@ int	check_if_walls_are_closed(t_game *game)
 	}
 	return (1);
 }
-

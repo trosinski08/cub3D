@@ -6,7 +6,7 @@
 /*   By: trosinsk <trosinsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 22:00:20 by trosinsk          #+#    #+#             */
-/*   Updated: 2024/09/28 03:13:30 by trosinsk         ###   ########.fr       */
+/*   Updated: 2024/09/28 15:50:15 by trosinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@
 # define WIDTH 1920
 # define HEIGHT 1080
 # define BPP 4
+# define PLAYER_COLOR 0xFFFF00
+# define WALL_COLOR 0x00FFFFFF
 
 typedef struct s_map
 {
@@ -95,11 +97,22 @@ typedef struct s_ray
 	int		is_vertical_hit;
 }				t_ray;
 
+typedef struct s_tex
+{
+	mlx_texture_t	*addr;
+	unsigned int	*arr;
+	double			texture_step;
+	double			x_texture;
+	double			y_texture;
+	int				tex_index;
+}			t_tex;
+
 typedef struct s_game
 {
 	t_map		map;
 	t_player	player;
 	t_ray		ray;
+	t_tex		*tex;
 	mlx_t		*mlx;
 	void		*win;
 	mlx_image_t	*img;
@@ -138,7 +151,6 @@ void		draw_ray(t_game *game);
 void		draw_wall(t_game *game, int x, int flag);
 void		draw_mini_map(t_game *game);
 void		lin_interp(t_game *game, double x2, double y2);
-int			check_if_walls_are_closed(t_game *game);
 int			check_if_walls_are_closed(t_game *game);
 
 // void	parse_resolution(t_game *game, char *line);

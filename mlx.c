@@ -6,7 +6,7 @@
 /*   By: trosinsk <trosinsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 00:58:36 by trosinsk          #+#    #+#             */
-/*   Updated: 2024/09/27 23:10:59 by trosinsk         ###   ########.fr       */
+/*   Updated: 2024/09/28 15:53:58 by trosinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ void	new_image(void *param)
 
 	game = (t_game *)param;
 	game->draw_start = 1;
-	draw_mini_map(game);
 	draw_ray(game);
+	draw_mini_map(game);
 	draw_player(game);
 	mlx_image_to_window(game->mlx, game->img, 0, 0);
 }
@@ -45,8 +45,6 @@ void	draw_mini_map(t_game *game)
 			y % TILE_SZ == TILE_SZ - 1 || x % TILE_SZ == TILE_SZ - 1)
 			{
 				color = get_rgba(0, 0, 0, 255);
-				if (game->map.floor == (int)color)
-					color = get_rgba(0, 126, 255, 255);
 			}
 			else if (game->map.map[y / TILE_SZ][x / TILE_SZ] && \
 			game->map.map[y / TILE_SZ][x / TILE_SZ] == WALL)
