@@ -6,7 +6,7 @@
 /*   By: trosinsk <trosinsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 00:51:36 by trosinsk          #+#    #+#             */
-/*   Updated: 2024/09/27 20:22:00 by trosinsk         ###   ########.fr       */
+/*   Updated: 2024/09/27 23:08:27 by trosinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,6 @@ void	my_keyhook(mlx_key_data_t keydata, void *param)
 	if (keydata.key == 257 && keydata.action == 1 && game->enter_flag == 0)
 	{
 		game->enter_flag = 1;
-		printf("img: %p\n", game->img);
-		printf("mlx: %p\n", game->mlx);
 		game->img = mlx_new_image(game->mlx, WIDTH, HEIGHT);
 		mlx_loop_hook(game->mlx, new_image, game);
 		mlx_image_to_window(game->mlx, game->img, 0, 0);

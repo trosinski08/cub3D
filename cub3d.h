@@ -6,7 +6,7 @@
 /*   By: trosinsk <trosinsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 22:00:20 by trosinsk          #+#    #+#             */
-/*   Updated: 2024/09/27 20:31:23 by trosinsk         ###   ########.fr       */
+/*   Updated: 2024/09/28 03:13:30 by trosinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 # define EMPTY 0
 # define PLAYER 3
 # define PI 3.14159265359
-# define FOV 60
+# define FOV 45
 # define SPEED 0.1
 # define ROTATE 0.1
 # define MINIMAP_SCALE 0.2
@@ -92,6 +92,7 @@ typedef struct s_ray
 	double	dist;
 	double	h_dist;
 	double	v_dist;
+	int		is_vertical_hit;
 }				t_ray;
 
 typedef struct s_game
@@ -129,6 +130,7 @@ void		fill_with_color(mlx_image_t *img, u_int32_t color, \
 			u_int32_t color2);
 void		set_player(t_game *game, int i, int j, char dir);
 void		set_map(t_game *game, int i, int j, char *line);
+void		set_texture(t_game *game);
 void		check_vertical_hit(t_game *game);
 void		check_horizontal_hit(t_game *game);
 double		fix_ang(double a);

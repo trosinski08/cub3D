@@ -6,7 +6,7 @@
 /*   By: trosinsk <trosinsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/21 17:48:44 by trosinsk          #+#    #+#             */
-/*   Updated: 2024/09/27 20:32:12 by trosinsk         ###   ########.fr       */
+/*   Updated: 2024/09/27 22:23:31 by trosinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@ void	parse_map(t_game *game, char *line);
 void	parse_texture(t_game *game, char *line)
 {
 	if (line[0] == 'N' && line[1] == 'O')
-		game->map.no = ft_strdup(line + 3);
+		game->map.no = ft_strtrim((ft_strdup(line + 3)), "\n");
 	else if (line[0] == 'S' && line[1] == 'O')
-		game->map.so = ft_strdup(line + 3);
+		game->map.so = ft_strtrim((ft_strdup(line + 3)), "\n");
 	else if (line[0] == 'W' && line[1] == 'E')
-		game->map.we = ft_strdup(line + 3);
+		game->map.we = ft_strtrim((ft_strdup(line + 3)), "\n");
 	else if (line[0] == 'E' && line[1] == 'A')
-		game->map.ea = ft_strdup(line + 3);
+		game->map.ea = ft_strtrim((ft_strdup(line + 3)), "\n");
 }
 //add check if texture is valid directory and xpm file
 

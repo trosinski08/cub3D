@@ -6,7 +6,7 @@
 /*   By: trosinsk <trosinsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 01:01:33 by trosinsk          #+#    #+#             */
-/*   Updated: 2024/09/27 20:30:39 by trosinsk         ###   ########.fr       */
+/*   Updated: 2024/09/28 00:11:49 by trosinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,10 @@ int	parser(t_game *game, char *file)
 	map = file_to_map(file, i);
 	if (i > 0)
 		init_map(game, i, map);
-	close(fd);
 	if (check_if_map_is_valid(game) == 0)
 		return (0);
-	return (free(line), 1);
+	set_texture(game);
+	return (close(fd), free(line), 1);
 }
 
 char	**file_to_map(char *file, int lines)

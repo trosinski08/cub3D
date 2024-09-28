@@ -6,7 +6,7 @@
 /*   By: trosinsk <trosinsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 17:20:26 by trosinsk          #+#    #+#             */
-/*   Updated: 2024/09/27 01:45:03 by trosinsk         ###   ########.fr       */
+/*   Updated: 2024/09/28 00:54:12 by trosinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,12 @@ void	set_map(t_game *game, int i, int j, char *line)
 		set_player(game, i, j, line[j]);
 	else
 		game->map.map[i][j] = -1;
+}
+
+void	set_texture(t_game *game)
+{
+	game->map.t_no = mlx_load_png(game->map.no);
+	game->map.t_so = mlx_load_png(game->map.so);
+	game->map.t_we = mlx_load_png(game->map.we);
+	game->map.t_ea = mlx_load_png(game->map.ea);
 }
