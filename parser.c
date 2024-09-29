@@ -6,7 +6,7 @@
 /*   By: sprodatu <sprodatu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 01:01:33 by trosinsk          #+#    #+#             */
-/*   Updated: 2024/09/29 01:30:35 by sprodatu         ###   ########.fr       */
+/*   Updated: 2024/09/29 02:50:19 by sprodatu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	parser(t_game *game, char *file)
 	if (check_if_map_is_valid(game) == 0)
 		return (0);
 	set_texture(game);
-	return (close(fd), free(line), 1);
+	return (close(fd), free(line), free_arr(map), 1);
 }
 
 char	**file_to_map(char *file, int lines)
@@ -128,7 +128,7 @@ void	parse_line(t_game *game, char *line)
 		parse_color(game, line);
 	else if (line[0] == '1' || line[0] == '0')
 		parse_map(game, line);
-	else if (line[0] == '\0' || line[0] == '\n')
+	else if (line[0] == '\0' || line[0] == '\n' || line[0] == ' ')
 		return ;
 	else
 		printf("Error\nInvalid line in file\n");

@@ -6,7 +6,7 @@
 /*   By: trosinsk <trosinsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 01:14:26 by trosinsk          #+#    #+#             */
-/*   Updated: 2024/09/28 21:09:00 by trosinsk         ###   ########.fr       */
+/*   Updated: 2024/09/29 00:38:05 by trosinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ void	render(t_game *game, int x, int flag)
 	i = bottom_pixel;
 	while (i < HEIGHT)
 		mlx_put_pixel(game->img, x, i++, game->map.floor);
+	free(texture);
 }
 
 double	get_x_o(t_game *game, mlx_texture_t *texture, int flag)

@@ -6,7 +6,7 @@
 /*   By: trosinsk <trosinsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 10:32:07 by trosinsk          #+#    #+#             */
-/*   Updated: 2024/06/09 18:52:23 by trosinsk         ###   ########.fr       */
+/*   Updated: 2024/09/29 01:10:47 by trosinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,6 @@ char	*ft_strtrim(char const	*s1, char const	*set)
 		else
 			return (NULL);
 	}
+	free((char *)s1);
 	return (trims);
 }

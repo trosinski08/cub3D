@@ -6,13 +6,14 @@
 /*   By: sprodatu <sprodatu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/21 17:48:44 by trosinsk          #+#    #+#             */
-/*   Updated: 2024/09/29 01:31:21 by sprodatu         ###   ########.fr       */
+/*   Updated: 2024/09/29 02:49:36 by sprodatu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 void	parse_texture(t_game *game, char *line);
+void	parse_texture2(t_game *game, char *line);
 void	parse_color(t_game *game, char *line);
 void	parse_map(t_game *game, char *line);
 // void	parse_resolution(t_game *game, char *line);
@@ -20,13 +21,28 @@ void	parse_map(t_game *game, char *line);
 void	parse_texture(t_game *game, char *line)
 {
 	if (line[0] == 'N' && line[1] == 'O')
+	{
 		game->map.no = ft_strtrim((ft_strdup(line + 3)), "\n");
+	}
 	else if (line[0] == 'S' && line[1] == 'O')
+	{
 		game->map.so = ft_strtrim((ft_strdup(line + 3)), "\n");
-	else if (line[0] == 'W' && line[1] == 'E')
+	}
+	else if ((line[0] == 'W' && line[1] == 'E') || \
+	(line[0] == 'E' && line[1] == 'A'))
+		parse_texture2(game, line);
+}
+
+void	parse_texture2(t_game *game, char *line)
+{
+	if (line[0] == 'W' && line[1] == 'E')
+	{
 		game->map.we = ft_strtrim((ft_strdup(line + 3)), "\n");
+	}
 	else if (line[0] == 'E' && line[1] == 'A')
+	{
 		game->map.ea = ft_strtrim((ft_strdup(line + 3)), "\n");
+	}
 }
 //add check if texture is valid directory and xpm file
 
