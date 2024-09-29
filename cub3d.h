@@ -6,7 +6,7 @@
 /*   By: trosinsk <trosinsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 22:00:20 by trosinsk          #+#    #+#             */
-/*   Updated: 2024/09/28 19:10:28 by trosinsk         ###   ########.fr       */
+/*   Updated: 2024/09/29 00:48:49 by trosinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,7 +158,8 @@ u_int32_t	get_rgba(int r, int g, int b, int a);
 void		fill_with_color(mlx_image_t *img, u_int32_t color, \
 			u_int32_t color2);
 u_int32_t	reverse_bytes(int c);
-int			free_garb(void);
+int			free_garb(t_game *game);
 void		draw_ceil(t_game *game, int x, int top_pixel);
+void		free_arr(char **arr);
 
 #endif
