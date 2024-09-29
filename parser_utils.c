@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trosinsk <trosinsk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sprodatu <sprodatu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/21 17:48:44 by trosinsk          #+#    #+#             */
-/*   Updated: 2024/09/28 13:37:23 by trosinsk         ###   ########.fr       */
+/*   Updated: 2024/09/29 01:31:21 by sprodatu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,10 @@ void	parse_map(t_game *game, char *line)
 		if (*line == '1' || *line == '0' || *line == ' ' || *line == '\n')
 			line++;
 		else if (*line == 'N' || *line == 'W' || *line == 'E' || *line == 'S')
+		{
+			game->map.map_player_count++;
 			line++;
+		}
 		else
 			printf("Error\nInvalid character in map\n");
 	}

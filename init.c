@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trosinsk <trosinsk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sprodatu <sprodatu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 01:15:23 by trosinsk          #+#    #+#             */
-/*   Updated: 2024/09/28 16:06:25 by trosinsk         ###   ########.fr       */
+/*   Updated: 2024/09/29 01:31:02 by sprodatu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ t_game	*init_game(void)
 	game->draw_start = 0;
 	game->enter_flag = 0;
 	game->mini_flag = 0;
+	game->map.map_player_count = 0;
 	return (game);
 }
 

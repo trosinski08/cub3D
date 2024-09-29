@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trosinsk <trosinsk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sprodatu <sprodatu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 01:01:33 by trosinsk          #+#    #+#             */
-/*   Updated: 2024/09/28 21:42:13 by trosinsk         ###   ########.fr       */
+/*   Updated: 2024/09/29 01:30:35 by sprodatu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,6 +156,8 @@ int	check_if_map_is_valid(t_game *game)
 		}
 		i++;
 	}
+	if (game->map.map_player_count != 1)
+		return (printf("Error\nInvalid number of players\n"), 0);
 	return (1);
 }
 
