@@ -42,7 +42,7 @@ make
 
 ### Controls
 - **W/A/S/D**: Move forward/left/backward/right
-- **Mouse**: Look around
+- **<-Arrows->**: Look around
 - **ESC**: Exit game
 
 ### Map Format
