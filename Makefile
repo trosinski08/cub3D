@@ -4,16 +4,14 @@ CFLAGS	:= -Wextra -Wall -Werror -Wunreachable-code -Ofast -g
 LIBMLX	:= ./MLX42
 SRCS 	:= main.c checks.c garbage_collector.c errors.c utils.c parser.c \
 			key_hook.c draw.c init.c raytrace.c parser_utils.c setters.c \
-			vertical_ray.c horizontal_ray.c
+			vertical_ray.c horizontal_ray.c render_utils.c parser_validation.c \
+			parser_helpers.c init_helpers.c parser_validation.c
 LIBFT	:= ./libft
-GNL		:= ./gnl42
-# BONUS	:= bonus.c
 
 HEADERS	:= -I ./include -I $(LIBMLX)/include
-LIBS	:= $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm -fsanitize=address
-INCLUDE := -L $(LIBFT) -lft -L $(GNL) -lgnl
+LIBS	:= $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
+INCLUDE := -L $(LIBFT) -lft
 OBJS	:= ${SRCS:.c=.o}
-# BOBJS	:= ${BONUS:.c=.o}
 
 all: libmlx $(NAME)
 
@@ -28,25 +26,16 @@ libmlx:
 
 $(NAME): $(OBJS)
 	make -sC $(LIBFT)
-	make -sC $(GNL)
 	@$(CC) $(OBJS) $(LIBS) $(HEADERS) $(INCLUDE) -o $(NAME)
-
-# bonus:
-# $(NAME): $(OBJS) $(BOBJS)
-# 	make -C $(LIBFT)
-# 	@$(CC) $(OBJS) $(BOBJS) $(LIBS) $(HEADERS) $(INCLUDE) -o $(NAME)
 
 clean:
 	@rm -rf $(OBJS) $(BOBJS)
 	@cd $(LIBFT) && $(MAKE) clean
-	@cd $(GNL) && $(MAKE) clean
 	@rm -rf MLX42
 
 fclean: clean
 	@rm -rf $(NAME)
 	@cd $(LIBFT) && $(MAKE) fclean
-	@cd $(GNL) && $(MAKE) fclean
-	
 
 re: clean all
 

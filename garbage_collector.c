@@ -17,7 +17,10 @@ void	free_map(t_game *game);
 
 int	free_garb(t_game *game)
 {
+	free_textures(game);
 	free_map(game);
+	if (game->mlx)
+		mlx_terminate(game->mlx);
 	free(game);
 	return (1);
 }
@@ -32,10 +35,32 @@ void	free_arr(char **arr)
 	free(arr);
 }
 
+void	free_textures(t_game *game)
+{
+	if (game->map.t_no)
+		mlx_delete_texture(game->map.t_no);
+	if (game->map.t_so)
+		mlx_delete_texture(game->map.t_so);
+	if (game->map.t_we)
+		mlx_delete_texture(game->map.t_we);
+	if (game->map.t_ea)
+		mlx_delete_texture(game->map.t_ea);
+	if (game->map.no)
+		free(game->map.no);
+	if (game->map.so)
+		free(game->map.so);
+	if (game->map.we)
+		free(game->map.we);
+	if (game->map.ea)
+		free(game->map.ea);
+}
+
 void	free_map(t_game *game)
 {
 	int	i;
 
+	if (!game->map.map)
+		return ;
 	i = 0;
 	while (i < game->map.height)
 		free(game->map.map[i++]);

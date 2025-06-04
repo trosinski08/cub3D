@@ -22,9 +22,10 @@ int	main(int argc, char **argv)
 	if (checker(game, argc, argv) == 0)
 		return (free_garb(game), 0);
 	mlx = init_mlx(game);
+	if (!mlx)
+		return (free_garb(game), 0);
 	mlx_key_hook(mlx, &my_keyhook, game);
 	mlx_loop(mlx);
-	mlx_terminate(mlx);
 	printf("GAME OVER\n");
 	return (free_garb(game), 0);
 }

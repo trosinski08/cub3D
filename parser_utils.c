@@ -20,28 +20,40 @@ void	parse_map(t_game *game, char *line);
 
 void	parse_texture(t_game *game, char *line)
 {
+	char	*temp;
+
 	if (line[0] == 'N' && line[1] == 'O')
 	{
-		game->map.no = ft_strtrim((ft_strdup(line + 3)), "\n");
+		temp = ft_strdup(line + 3);
+		game->map.no = ft_strtrim(temp, "\n");
+		free(temp);
 	}
 	else if (line[0] == 'S' && line[1] == 'O')
 	{
-		game->map.so = ft_strtrim((ft_strdup(line + 3)), "\n");
+		temp = ft_strdup(line + 3);
+		game->map.so = ft_strtrim(temp, "\n");
+		free(temp);
 	}
 	else if ((line[0] == 'W' && line[1] == 'E') || \
-	(line[0] == 'E' && line[1] == 'A'))
+(line[0] == 'E' && line[1] == 'A'))
 		parse_texture2(game, line);
 }
 
 void	parse_texture2(t_game *game, char *line)
 {
+	char	*temp;
+
 	if (line[0] == 'W' && line[1] == 'E')
 	{
-		game->map.we = ft_strtrim((ft_strdup(line + 3)), "\n");
+		temp = ft_strdup(line + 3);
+		game->map.we = ft_strtrim(temp, "\n");
+		free(temp);
 	}
 	else if (line[0] == 'E' && line[1] == 'A')
 	{
-		game->map.ea = ft_strtrim((ft_strdup(line + 3)), "\n");
+		temp = ft_strdup(line + 3);
+		game->map.ea = ft_strtrim(temp, "\n");
+		free(temp);
 	}
 }
 //add check if texture is valid directory and xpm file
@@ -87,7 +99,10 @@ void	parse_map(t_game *game, char *line)
 			line++;
 		}
 		else
+		{
 			printf("Error\nInvalid character in map\n");
+			return ;
+		}
 	}
 }
 
@@ -104,12 +119,13 @@ int	check_if_walls_are_closed(t_game *game)
 		{
 			if (game->map.map[i][j] == ' ')
 			{
-				if (i == 0 || i == game->map.height - 1 || j == 0 \
-				|| j == game->map.width - 1)
+				if (i == 0 || i == game->map.height - 1 || j == 0
+					|| j == game->map.width - 1)
 					return (printf("Error\nMap is not closed\n"), 0);
-				if (game->map.map[i - 1][j] == ' ' || \
-			game->map.map[i + 1][j] == ' ' \
-			|| game->map.map[i][j - 1] == ' ' || game->map.map[i][j + 1] == ' ')
+				if (game->map.map[i - 1][j] == ' '
+					|| game->map.map[i + 1][j] == ' '
+					|| game->map.map[i][j - 1] == ' '
+					|| game->map.map[i][j + 1] == ' ')
 					return (printf("Error\nMap is not closed\n"), 0);
 			}
 			j++;

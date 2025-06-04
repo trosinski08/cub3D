@@ -41,19 +41,23 @@ size_t	ft_strlcat(char *dest, const char *source, size_t destsz)
 {
 	size_t	i1;
 	size_t	i2;
+	size_t	src_len;
 
+	src_len = ft_strlen(source);
+	if (dest == NULL && destsz == 0)
+		return (src_len);
 	i1 = 0;
-	i2 = 0;
 	while (dest[i1] != '\0' && i1 < destsz)
-	{
 		i1++;
-	}
-	while (source[i2] != '\0' && (i1 + i2 + 1) < destsz)
-	{
-		dest[i1 + i2] = source[i2];
-		i2++;
-	}
+	i2 = 0;
 	if (i1 < destsz)
+	{
+		while (source[i2] != '\0' && (i1 + i2 + 1) < destsz)
+		{
+			dest[i1 + i2] = source[i2];
+			i2++;
+		}
 		dest[i1 + i2] = '\0';
-	return (i1 + ft_strlen(source));
+	}
+	return (i1 + src_len);
 }

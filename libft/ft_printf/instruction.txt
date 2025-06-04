@@ -1,0 +1,4 @@
+make re && cc -Iinclude  mandatory/test.c -o test -L. -lftprintf
+
+
+add libft submodul

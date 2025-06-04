@@ -31,8 +31,8 @@ void	my_keyhook(mlx_key_data_t keydata, void *param)
 	game->player.p_delta_y = -sin(game->player.dir) * step;
 	game->player.dir = fix_ang(game->player.dir);
 	movements(game, keydata, step);
-	if ((keydata.key == MLX_KEY_RIGHT || keydata.key == MLX_KEY_LEFT) \
-	&& (keydata.action == 1 || keydata.action == 2))
+	if ((keydata.key == MLX_KEY_RIGHT || keydata.key == MLX_KEY_LEFT) && \
+(keydata.action == 1 || keydata.action == 2))
 		left_right_look(game, step, keydata);
 	if (keydata.key == 256 && keydata.action == 1)
 		exit(0);
@@ -72,8 +72,8 @@ void	movements(t_game *game, mlx_key_data_t keydata, double step)
 	{
 		game->player.pos_x += game->player.p_delta_x;
 		game->player.pos_y += game->player.p_delta_y;
-		while (game->map.map[(int)game->player.pos_y / TILE_SZ] \
-		[(int)game->player.pos_x / TILE_SZ] == 1)
+		while (game->map.map[(int)game->player.pos_y / TILE_SZ]\
+[(int)game->player.pos_x / TILE_SZ] == 1)
 		{
 			game->player.pos_x -= game->player.p_delta_x;
 			game->player.pos_y -= game->player.p_delta_y;
@@ -82,8 +82,8 @@ void	movements(t_game *game, mlx_key_data_t keydata, double step)
 	}
 	if (keydata.key == 83 && (keydata.action == 1 || keydata.action == 2))
 		backward_movements(game, keydata);
-	if ((keydata.key == 65 || keydata.key == 68) && (keydata.action == 1 \
-	|| keydata.action == 2))
+	if ((keydata.key == 65 || keydata.key == 68) && (keydata.action == 1 || \
+keydata.action == 2))
 		left_right_movements(game, keydata, step);
 }
 
@@ -93,8 +93,8 @@ void	left_right_movements(t_game *game, mlx_key_data_t keydata, double step)
 	{
 		game->player.pos_x += sin(-game->player.dir) * step / 2;
 		game->player.pos_y -= cos(-game->player.dir) * step / 2;
-		while (game->map.map[(int)game->player.pos_y / TILE_SZ] \
-		[(int)game->player.pos_x / TILE_SZ] == 1)
+		while (game->map.map[(int)game->player.pos_y / TILE_SZ]\
+[(int)game->player.pos_x / TILE_SZ] == 1)
 		{
 			step *= 0.5;
 			game->player.pos_x -= sin(game->player.dir) * step / 2;
@@ -105,8 +105,8 @@ void	left_right_movements(t_game *game, mlx_key_data_t keydata, double step)
 	{
 		game->player.pos_x += sin(game->player.dir) * step / 2;
 		game->player.pos_y += cos(game->player.dir) * step / 2;
-		while (game->map.map[(int)game->player.pos_y / TILE_SZ] \
-		[(int)game->player.pos_x / TILE_SZ] == 1)
+		while (game->map.map[(int)game->player.pos_y / TILE_SZ]\
+[(int)game->player.pos_x / TILE_SZ] == 1)
 		{
 			step *= 0.5;
 			game->player.pos_x -= (sin(game->player.dir) * step / 2);
@@ -122,8 +122,8 @@ void	backward_movements(t_game *game, mlx_key_data_t keydata)
 	{
 		game->player.pos_x -= game->player.p_delta_x;
 		game->player.pos_y -= game->player.p_delta_y;
-		while (game->map.map[(int)game->player.pos_y / TILE_SZ] \
-		[(int)game->player.pos_x / TILE_SZ] == 1)
+		while (game->map.map[(int)game->player.pos_y / TILE_SZ]\
+[(int)game->player.pos_x / TILE_SZ] == 1)
 		{
 			game->player.pos_x += game->player.p_delta_x;
 			game->player.pos_y += game->player.p_delta_y;

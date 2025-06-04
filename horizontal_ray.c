@@ -14,7 +14,7 @@
 
 static void	calc_h_step(t_game *game, double rev_tan, int direction);
 void		check_horizontal_hit(t_game *game);
-void		horizontal_dist(t_game *game, int i);
+int			horizontal_dist(t_game *game);
 
 void	check_horizontal_hit(t_game *game)
 {
@@ -37,7 +37,11 @@ void	check_horizontal_hit(t_game *game)
 		i = game->map.height;
 	}
 	while (i < game->map.height)
-		horizontal_dist(game, i++);
+	{
+		if (horizontal_dist(game))
+			break ;
+		i++;
+	}
 }
 
 static	void	calc_h_step(t_game *game, double rev_tan, int direction)
@@ -48,12 +52,12 @@ static	void	calc_h_step(t_game *game, double rev_tan, int direction)
 	else
 		game->ray.y -= 0.0001;
 	game->ray.x = game->player.pos_x + \
-	(game->player.pos_y - game->ray.y) * rev_tan;
+(game->player.pos_y - game->ray.y) * rev_tan;
 	game->player.temp_y = direction * TILE_SZ;
 	game->player.temp_x = -game->player.temp_y * rev_tan;
 }
 
-void	horizontal_dist(t_game *game, int i)
+int	horizontal_dist(t_game *game)
 {
 	double	dx;
 	double	dy;
@@ -61,19 +65,20 @@ void	horizontal_dist(t_game *game, int i)
 	game->ray.hit_x = game->ray.x / TILE_SZ;
 	game->ray.hit_y = game->ray.y / TILE_SZ;
 	if (game->ray.hit_x >= 0 && game->ray.hit_y >= 0 && game->ray.hit_x <= \
-	game->map.width && game->ray.hit_y <= game->map.height && game->map.map \
-	[(int)game->ray.hit_y][(int)game->ray.hit_x] != 0)
+game->map.width && game->ray.hit_y <= game->map.height && game->map.map \
+[(int)game->ray.hit_y][(int)game->ray.hit_x] != 0)
 	{
 		dx = game->ray.x - game->player.pos_x;
 		dy = game->ray.y - game->player.pos_y;
 		game->ray.temp_hx = game->ray.x;
 		game->ray.temp_hy = game->ray.y;
 		game->ray.h_dist = sqrt(dx * dx + dy * dy);
-		i = game->map.height;
+		return (1);
 	}
 	else
 	{
 		game->ray.x += game->player.temp_x;
 		game->ray.y += game->player.temp_y;
+		return (0);
 	}
 }

@@ -31,17 +31,15 @@ mlx_t	*init_mlx(t_game *game)
 	game->img = img;
 	mlx_put_string(mlx, "Cub3D in progres!", WIDTH / 2 - 150, HEIGHT / 2 - 20);
 	mlx_put_string(mlx, "Press ESC to exit or Enter to continue\n:)", \
-	WIDTH / 2 - 150, HEIGHT / 2 + 20);
+WIDTH / 2 - 150, HEIGHT / 2 + 20);
 	mlx_put_string(mlx, "Press W A S D to move", \
-	WIDTH / 2 - 150, HEIGHT / 2 + 100);
+WIDTH / 2 - 150, HEIGHT / 2 + 100);
 	mlx_put_string(mlx, "Press arrows left/right to rotate", \
-	WIDTH / 2 - 150, HEIGHT / 2 + 140);
+WIDTH / 2 - 150, HEIGHT / 2 + 140);
 	mlx_put_string(mlx, "Enjoy!", WIDTH / 2 - 150, HEIGHT / 2 + 180);
+	mlx_image_to_window(mlx, img, 0, 0);
 	return (mlx);
 }
-	// mlx_image_to_window(mlx, img, 0, 0);
-	// mlx_put_string(mlx, "Press M to show/hide minimap", 
-	// WIDTH / 2 - 150, HEIGHT / 2 + 60);
 
 t_game	*init_game(void)
 {
@@ -53,6 +51,14 @@ t_game	*init_game(void)
 	game->map.width = 0;
 	game->map.height = 0;
 	game->map.map = NULL;
+	game->map.t_no = NULL;
+	game->map.t_so = NULL;
+	game->map.t_we = NULL;
+	game->map.t_ea = NULL;
+	game->map.no = NULL;
+	game->map.so = NULL;
+	game->map.we = NULL;
+	game->map.ea = NULL;
 	game->mlx = NULL;
 	game->img = NULL;
 	game->draw_start = 0;
@@ -64,30 +70,15 @@ t_game	*init_game(void)
 
 void	init_map(t_game *game, int height, char **map_str)
 {
-	int		**map;
-	int		i;
-	int		j;
+	int	**map;
 
 	game->map.width = ft_strlen(map_str[0]) - 1;
-	map = (int **)malloc(sizeof(int *) * height);
+	map = allocate_map_memory(height, game->map.width);
 	if (!map)
 		return (printf("Error\nFailed to allocate memory\n"), (void) NULL);
-	i = -1;
-	while (++i <= height)
-	{
-		map[i] = (int *)malloc(sizeof(int) * game->map.width);
-		if (!map[i])
-			return (printf("Error\nFailed to allocate memory\n"), (void) NULL);
-	}
 	game->map.map = map;
 	game->map.height = height;
-	i = -1;
-	while (++i < height)
-	{
-		j = 0;
-		while (j < game->map.width)
-			set_map(game, i, j++, map_str[i]);
-	}
+	populate_map(game, height, map_str);
 	game->player = player_init(game);
 }
 
@@ -103,23 +94,3 @@ t_player	player_init(t_game *game)
 	player.p_delta_y = sin(player.dir) * 5;
 	return (player);
 }
-
-// void	print_map2(int **map)
-// {
-// 	int	i;
-// 	int	j;
-
-// 	i = -1;
-// 	printf("//****************Map********************//\n");
-// 	while (++i < 21)
-// 	{
-// 		j = 0;
-// 		while (j < 21)
-// 		{
-// 			printf("%d", map[i][j]);
-// 			j++;
-// 		}
-// 		printf("\n");
-// 	}
-// 	printf("//***************************************//\n");
-// }

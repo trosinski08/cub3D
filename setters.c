@@ -39,17 +39,17 @@ void	set_map(t_game *game, int i, int j, char *line)
 	if (line[j] == ' ')
 	{
 		if (i == 0 || i == game->map.height || j == 0 || \
-		j == game->map.width || (game->map.map[i][j + 1] && \
-		game->map.map[i][j + 1] == 1) || (game->map.map[i][j - 1] && \
-		game->map.map[i][j - 1] == 1))
+j == game->map.width || (game->map.map[i][j + 1] && \
+game->map.map[i][j + 1] == 1) || (game->map.map[i][j - 1] && \
+game->map.map[i][j - 1] == 1))
 			game->map.map[i][j] = 1;
 		else
 			game->map.map[i][j] = 0;
 	}
 	else if (line[j] == '1' || line[j] == '0')
 		game->map.map[i][j] = line[j] - '0';
-	else if (line[j] == 'N' || line[j] == 'W' || line[j] == 'E' \
-	|| line[j] == 'S')
+	else if (line[j] == 'N' || line[j] == 'W' || \
+line[j] == 'E' || line[j] == 'S')
 		set_player(game, i, j, line[j]);
 	else
 		game->map.map[i][j] = -1;
@@ -62,18 +62,22 @@ void	set_texture(t_game *game)
 		printf("Error\nMissing texture\n");
 		exit(0);
 	}
-	if (!mlx_load_png(game->map.no) || !mlx_load_png(game->map.so) || \
-	!mlx_load_png(game->map.we) || !mlx_load_png(game->map.ea))
-	{
-		printf("Error\nInvalid texture file\n");
-		exit(0);
-	}
 	game->map.t_no = mlx_load_png(game->map.no);
 	game->map.t_so = mlx_load_png(game->map.so);
 	game->map.t_we = mlx_load_png(game->map.we);
 	game->map.t_ea = mlx_load_png(game->map.ea);
+	if (!game->map.t_no || !game->map.t_so || \
+!game->map.t_we || !game->map.t_ea)
+	{
+		printf("Error\nInvalid texture file\n");
+		exit(0);
+	}
 	free(game->map.no);
 	free(game->map.so);
 	free(game->map.we);
 	free(game->map.ea);
+	game->map.no = NULL;
+	game->map.so = NULL;
+	game->map.we = NULL;
+	game->map.ea = NULL;
 }

@@ -6,13 +6,11 @@
 /*   By: trosinsk <trosinsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 15:45:24 by trosinsk          #+#    #+#             */
-/*   Updated: 2024/09/28 13:35:42 by trosinsk         ###   ########.fr       */
+/*   Updated: 2024/06/09 18:52:14 by trosinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/libft.h"
-#include <stdio.h>
-
 /*
 DESCRIPTION         top
        The memset() function fills the first n bytes of the memory area
@@ -34,12 +32,13 @@ RETURN VALUE         top
 void	*ft_memset(void *s, int c, size_t n)
 {
 	char	*temp;
-	size_t	i;
+	int		i;
+	int		t;
 
 	i = 0;
 	temp = (char *)s;
-	write(1, &c, 1);
-	while (i < n)
+	t = n;
+	while (i < t)
 	{
 		temp[i] = c;
 		i++;

@@ -6,17 +6,16 @@
 /*   By: trosinsk <trosinsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 01:14:26 by trosinsk          #+#    #+#             */
-/*   Updated: 2024/09/29 00:38:05 by trosinsk         ###   ########.fr       */
+/*   Updated: 2024/12/04 12:00:00 by trosinsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void			raytrace(t_game *game);
-void			render(t_game *game, int x, int flag);
-mlx_texture_t	*set_texture_direction(t_game *game, int flag);
-double			get_x_o(t_game *game, mlx_texture_t *texture, int flag);
-
+/*
+** Main raycasting function - traces rays across screen width
+** @param game: game structure containing all necessary data
+*/
 void	raytrace(t_game *game)
 {
 	int	screen_x;
@@ -43,79 +42,45 @@ void	raytrace(t_game *game)
 	mlx_image_to_window(game->mlx, game->img, 0, 0);
 }
 
-void	render(t_game *game, int x, int flag)
+/*
+** Initialize texture structure for rendering
+** @param texture: texture structure to initialize
+** @param game: game structure
+** @param flag: wall orientation flag
+*/
+static void	init_texture(t_tex *texture, t_game *game, int flag)
 {
-	t_tex			*texture;
-	int				h;
-	int				top_pixel;
-	int				bottom_pixel;
-	int				i;
+	int	h;
 
-	game->ray.dist *= cos(fix_ang(game->player.dir - game->ray.dir));
-	texture = (t_tex *)malloc(sizeof(t_tex));
-	game->tex = texture;
 	texture->addr = set_texture_direction(game, flag);
 	texture->arr = (unsigned int *)texture->addr->pixels;
 	h = (TILE_SZ / game->ray.dist) * ((WIDTH / 2) / tan(game->player.fov / 2));
 	texture->h = h;
-	top_pixel = fmax(0, (HEIGHT / 2) - (h / 2));
-	bottom_pixel = fmin(HEIGHT, (HEIGHT / 2) + (h / 2));
 	texture->texture_step = (double)texture->addr->height / h;
-	draw_ceil(game, x, top_pixel);
 	texture->y_texture = 0;
 	texture->x_texture = get_x_o(game, texture->addr, flag);
-	draw_wall(game, x, top_pixel, bottom_pixel);
-	i = bottom_pixel;
+}
+
+/*
+** Render single screen column with ceiling, wall, and floor
+** @param game: game structure
+** @param x: screen X coordinate
+** @param flag: wall orientation (1=horizontal, 0=vertical)
+*/
+void	render(t_game *game, int x, int flag)
+{
+	t_tex				texture;
+	t_render_params		params;
+	int					i;
+
+	game->ray.dist *= cos(fix_ang(game->player.dir - game->ray.dir));
+	init_texture(&texture, game, flag);
+	params.x = x;
+	params.top_pixel = fmax(0, (HEIGHT / 2) - (texture.h / 2));
+	params.bottom_pixel = fmin(HEIGHT, (HEIGHT / 2) + (texture.h / 2));
+	draw_ceil(game, x, params.top_pixel);
+	draw_wall_optimized(game, &texture, &params);
+	i = params.bottom_pixel;
 	while (i < HEIGHT)
 		mlx_put_pixel(game->img, x, i++, game->map.floor);
-	free(texture);
-}
-
-double	get_x_o(t_game *game, mlx_texture_t *texture, int flag)
-{
-	double	wall_hit;
-
-	if (flag == 1)
-		wall_hit = game->player.pos_x + game->ray.dist * cos(game->ray.dir);
-	else
-		wall_hit = game->player.pos_y + game->ray.dist * sin(game->ray.dir);
-	return (fmod(wall_hit, TILE_SZ) / TILE_SZ * texture->width);
-}
-
-mlx_texture_t	*set_texture_direction(t_game *game, int flag)
-{
-	if (flag == 1)
-	{
-		if (game->ray.temp_hy > game->map.height * TILE_SZ / 2)
-			return (game->map.t_no);
-		else
-			return (game->map.t_so);
-	}
-	else
-	{
-		if (game->ray.temp_vx > game->map.width * TILE_SZ / 2)
-			return (game->map.t_ea);
-		else
-			return (game->map.t_we);
-	}
-}
-
-void	draw_wall(t_game *game, int x, int top_pixel, int bottom_pixel)
-{
-	t_tex	*texture;
-	int		i;
-
-	texture = game->tex;
-	i = HEIGHT / 2 - texture->h / 2;
-	while (i < bottom_pixel)
-	{
-		texture->tex_index = (int)texture->y_texture * texture->addr->width + \
-		(int)texture->x_texture;
-		if (texture->tex_index < texture->addr->width * \
-	texture->addr->height && i >= top_pixel)
-			mlx_put_pixel(game->img, x, i, \
-			reverse_bytes(texture->arr[texture->tex_index]));
-		texture->y_texture += texture->texture_step;
-		i++;
-	}
 }
