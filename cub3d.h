@@ -108,13 +108,6 @@ typedef struct s_tex
 	int				h;
 }			t_tex;
 
-typedef struct s_render_params
-{
-	int	x;
-	int	top_pixel;
-	int	bottom_pixel;
-}			t_render_params;
-
 typedef struct s_game
 {
 	t_map		map;
@@ -129,51 +122,47 @@ typedef struct s_game
 }				t_game;
 
 // init
-t_game			*init_game(void);
-mlx_t			*init_mlx(t_game *game);
-void			init_map(t_game *game, int height, char **map_str);
-void			my_keyhook(mlx_key_data_t keydata, void *param);
+t_game		*init_game(void);
+mlx_t		*init_mlx(t_game *game);
+void		init_map(t_game *game, int height, char **map_str);
+void		my_keyhook(mlx_key_data_t keydata, void *param);
 
 // parser
-int				parser(t_game *game, char *file);
-void			parse_texture(t_game *game, char *line);
-void			parse_color(t_game *game, char *line);
-void			parse_map(t_game *game, char *line);
-int				checker(t_game *game, int argc, char **argv);
-int				check_if_walls_are_closed(t_game *game);
+int			parser(t_game *game, char *file);
+void		parse_texture(t_game *game, char *line);
+void		parse_color(t_game *game, char *line);
+void		parse_map(t_game *game, char *line);
+int			checker(t_game *game, int argc, char **argv);
+int			check_if_walls_are_closed(t_game *game);
 
 //setters
-void			set_player(t_game *game, int i, int j, char dir);
-void			set_map(t_game *game, int i, int j, char *line);
-void			set_texture(t_game *game);
+void		set_player(t_game *game, int i, int j, char dir);
+void		set_map(t_game *game, int i, int j, char *line);
+void		set_texture(t_game *game);
 
 //draw
-void			new_game(void *param);
-void			draw_player(t_game *game);
-void			draw_mini_map(t_game *game);
-void			draw_wall_optimized(t_game *game, t_tex *texture,\
-	t_render_params *params);
-void			draw_line(t_game *game, int x2, int y2);
+void		new_game(void *param);
+void		draw_player(t_game *game);
+void		draw_mini_map(t_game *game);
+void		draw_wall(t_game *game, int x, int top_pixel, int bottom_pixel);
+void		draw_wall_optimized(t_game *game, t_tex *texture, int x, int top_pixel, int bottom_pixel);
+void		draw_line(t_game *game, int x2, int y2);
 
 //raytrace
-void			raytrace(t_game *game);
-void			check_vertical_hit(t_game *game);
-void			check_horizontal_hit(t_game *game);
-void			render(t_game *game, int x, int flag);
-
-//render_utils
-mlx_texture_t	*set_texture_direction(t_game *game, int flag);
-double			get_x_o(t_game *game, mlx_texture_t *texture, int flag);
+void		raytrace(t_game *game);
+void		check_vertical_hit(t_game *game);
+void		check_horizontal_hit(t_game *game);
+void		render(t_game *game, int x, int flag);
 
 //utils
-double			fix_ang(double a);
-u_int32_t		get_rgba(int r, int g, int b, int a);
-void			fill_with_color(mlx_image_t *img, u_int32_t color,\
-	u_int32_t color2);
-u_int32_t		reverse_bytes(int c);
-int				free_garb(t_game *game);
-void			draw_ceil(t_game *game, int x, int top_pixel);
-void			free_arr(char **arr);
-void			free_textures(t_game *game);
+double		fix_ang(double a);
+u_int32_t	get_rgba(int r, int g, int b, int a);
+void		fill_with_color(mlx_image_t *img, u_int32_t color, \
+			u_int32_t color2);
+u_int32_t	reverse_bytes(int c);
+int			free_garb(t_game *game);
+void		draw_ceil(t_game *game, int x, int top_pixel);
+void		free_arr(char **arr);
+void		free_textures(t_game *game);
 
 #endif

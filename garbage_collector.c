@@ -45,6 +45,8 @@ void	free_textures(t_game *game)
 		mlx_delete_texture(game->map.t_we);
 	if (game->map.t_ea)
 		mlx_delete_texture(game->map.t_ea);
+	
+	// Free texture path strings
 	if (game->map.no)
 		free(game->map.no);
 	if (game->map.so)
@@ -60,7 +62,7 @@ void	free_map(t_game *game)
 	int	i;
 
 	if (!game->map.map)
-		return ;
+		return;
 	i = 0;
 	while (i < game->map.height)
 		free(game->map.map[i++]);

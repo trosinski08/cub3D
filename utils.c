@@ -14,8 +14,8 @@
 
 unsigned int	reverse_bytes(int c);
 u_int32_t		get_rgba(int r, int g, int b, int a);
-void			fill_with_color(mlx_image_t *img, u_int32_t color,\
-	u_int32_t color2);
+void			fill_with_color(mlx_image_t *img, \
+	u_int32_t color, u_int32_t color2);
 double			fix_ang(double a);
 void			draw_ceil(t_game *game, int x, int top_pixel);
 
@@ -30,8 +30,9 @@ void	draw_ceil(t_game *game, int x, int top_pixel)
 
 u_int32_t	reverse_bytes(int c)
 {
-	return (((c & 0x000000FF) << 24) | ((c & 0x0000FF00) << 8)
-		| ((c & 0x00FF0000) >> 8) | ((c & 0xFF000000) >> 24));
+	return (((c & 0x000000FF) << 24) |\
+	((c & 0x0000FF00) << 8) | ((c & 0x00FF0000) >> 8) |\
+	((c & 0xFF000000) >> 24));
 }
 
 u_int32_t	get_rgba(int r, int g, int b, int a)

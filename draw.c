@@ -45,11 +45,11 @@ void	draw_mini_map(t_game *game)
 		while (++y < game->map.height * TILE_SZ)
 		{
 			color = game->map.floor * 0.5;
-			if (y % TILE_SZ == 0 || x % TILE_SZ == 0
-				|| y % TILE_SZ == TILE_SZ - 1 || x % TILE_SZ == TILE_SZ - 1)
+			if (y % TILE_SZ == 0 || x % TILE_SZ == 0 || \
+			y % TILE_SZ == TILE_SZ - 1 || x % TILE_SZ == TILE_SZ - 1)
 				color = get_rgba(0, 0, 0, 255);
-			else if (game->map.map[y / TILE_SZ][x / TILE_SZ]
-				&& game->map.map[y / TILE_SZ][x / TILE_SZ] == WALL)
+			else if (game->map.map[y / TILE_SZ][x / TILE_SZ] && \
+			game->map.map[y / TILE_SZ][x / TILE_SZ] == WALL)
 				color = get_rgba(255, 255, 255, 255);
 			mlx_put_pixel(game->img, x, y, color);
 		}
@@ -91,9 +91,9 @@ void	draw_ray(t_game *game)
 		{
 			ray_x = game->player.pos_x + cos(angle) * distance;
 			ray_y = game->player.pos_y - sin(angle) * distance;
-			if (ray_x < game->map.width * TILE_SZ && ray_y < game->map.height
-				* TILE_SZ && ray_x > 0 && ray_y > 0 && game->map.map[(int)ray_y
-					/ TILE_SZ][(int)ray_x / TILE_SZ] == 0)
+			if (ray_x < game->map.width * TILE_SZ && ray_y < game->map.height \
+			* TILE_SZ && ray_x > 0 && ray_y > 0 && game->map.map[(int)ray_y / \
+			TILE_SZ][(int)ray_x / TILE_SZ] == 0)
 				draw_line(game, ray_x, ray_y);
 			distance += TILE_SZ / 4;
 		}
@@ -118,9 +118,8 @@ void	draw_line(t_game *game, int x2, int y2)
 	y = game->player.pos_y;
 	while ((int)(x - x2) || (int)(y - y2))
 	{
-		if (x < game->map.width * TILE_SZ && y < game->map.height * TILE_SZ
-			&& x > 0 && y > 0 && game->map.map[(int)y / TILE_SZ][(int)x
-			/ TILE_SZ] == 0)
+		if (x < game->map.width * TILE_SZ && y < game->map.height * TILE_SZ \
+	&& x > 0 && y > 0 && game->map.map[(int)y / TILE_SZ][(int)x / TILE_SZ] == 0)
 			mlx_put_pixel(game->img, x, y, WALL_COLOR);
 		else
 			break ;

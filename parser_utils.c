@@ -35,7 +35,7 @@ void	parse_texture(t_game *game, char *line)
 		free(temp);
 	}
 	else if ((line[0] == 'W' && line[1] == 'E') || \
-(line[0] == 'E' && line[1] == 'A'))
+	(line[0] == 'E' && line[1] == 'A'))
 		parse_texture2(game, line);
 }
 
@@ -101,7 +101,7 @@ void	parse_map(t_game *game, char *line)
 		else
 		{
 			printf("Error\nInvalid character in map\n");
-			return ;
+			return; // Fixed: Return to prevent infinite loop
 		}
 	}
 }
@@ -119,13 +119,12 @@ int	check_if_walls_are_closed(t_game *game)
 		{
 			if (game->map.map[i][j] == ' ')
 			{
-				if (i == 0 || i == game->map.height - 1 || j == 0
-					|| j == game->map.width - 1)
+				if (i == 0 || i == game->map.height - 1 || j == 0 \
+				|| j == game->map.width - 1)
 					return (printf("Error\nMap is not closed\n"), 0);
-				if (game->map.map[i - 1][j] == ' '
-					|| game->map.map[i + 1][j] == ' '
-					|| game->map.map[i][j - 1] == ' '
-					|| game->map.map[i][j + 1] == ' ')
+				if (game->map.map[i - 1][j] == ' ' || \
+			game->map.map[i + 1][j] == ' ' \
+			|| game->map.map[i][j - 1] == ' ' || game->map.map[i][j + 1] == ' ')
 					return (printf("Error\nMap is not closed\n"), 0);
 			}
 			j++;
